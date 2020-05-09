@@ -139,11 +139,11 @@ WITH (OIDS=FALSE)
 DROP TABLE IF EXISTS "public"."software";
 CREATE TABLE "public"."software" (
 "id" int4 DEFAULT nextval('software_id_seq'::regclass) NOT NULL,
-"softwarename" varchar(64) COLLATE "default",
+"softwarename" varchar(256) COLLATE "default",
 "softwareversion" varchar(32) COLLATE "default",
 "uploadtime" timestamp(6),
 "size" varchar(16) COLLATE "default",
-"customername" varchar(256) COLLATE "default",
+"customername" varchar(512) COLLATE "default",
 "downstatus" int4,
 "createtime" timestamp(6),
 "moditytime" timestamp(6),
