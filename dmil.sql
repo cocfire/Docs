@@ -148,7 +148,7 @@ CREATE TABLE "public"."software" (
 "createtime" timestamp(6),
 "moditytime" timestamp(6),
 "uploadsoftwarename" varchar(64) COLLATE "default",
-"erpcode" int4,
+"erpcode" varchar(32) COLLATE "default",
 "filetimestamp" varchar(16) COLLATE "default",
 "softwaretype" varchar(16) COLLATE "default",
 "signflag" varchar(16) COLLATE "default",
