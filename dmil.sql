@@ -78,7 +78,7 @@ CREATE TABLE "public"."device" (
 "softwarename" varchar(64) COLLATE "default",
 "erpcode" varchar(32) COLLATE "default",
 "softwareversion" varchar(32) COLLATE "default",
-"roderid" varchar(16) COLLATE "default",
+“orderid" varchar(16) COLLATE "default",
 "projectid" int4,
 "projectname" varchar(32) COLLATE "default",
 "companyname" varchar(256) COLLATE "default",
