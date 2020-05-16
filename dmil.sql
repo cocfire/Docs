@@ -65,8 +65,8 @@ CREATE SEQUENCE "public"."syslog_id_seq"
 DROP TABLE IF EXISTS "public"."device";
 CREATE TABLE "public"."device" (
 "id" int4 DEFAULT nextval('device_id_seq'::regclass) NOT NULL,
-"clientid" varchar(64) COLLATE "default",
-"termsn" varchar(64) COLLATE "default" NOT NULL,
+"clientid" varchar(256) COLLATE "default",
+"termsn" varchar(256) COLLATE "default" NOT NULL,
 "termid" varchar(64) COLLATE "default",
 "termcode" varchar(64) COLLATE "default",
 "termtype" int4,
@@ -78,7 +78,7 @@ CREATE TABLE "public"."device" (
 "softwarename" varchar(64) COLLATE "default",
 "erpcode" varchar(32) COLLATE "default",
 "softwareversion" varchar(32) COLLATE "default",
-"roderid" varchar(16) COLLATE "default",
+"orderid" varchar(16) COLLATE "default",
 "projectid" int4,
 "projectname" varchar(32) COLLATE "default",
 "companyname" varchar(256) COLLATE "default",
@@ -98,10 +98,11 @@ CREATE TABLE "public"."device" (
 "wifiip" varchar(32) COLLATE "default",
 "emqversion" varchar(16) COLLATE "default",
 "deviceid" varchar(32) COLLATE "default",
-"imei" varchar(64) COLLATE "default",
-"udid" varchar(64) COLLATE "default",
-"uuid" varchar(64) COLLATE "default",
-"barcode" varchar(32) COLLATE "default"
+"imei" varchar(256) COLLATE "default",
+"udid" varchar(256) COLLATE "default",
+"uuid" varchar(256) COLLATE "default",
+"barcode" varchar(32) COLLATE "default",
+"facelibrid" int4
 )
 WITH (OIDS=FALSE)
 
@@ -117,13 +118,14 @@ WITH (OIDS=FALSE)
 DROP TABLE IF EXISTS "public"."offlinemsg";
 CREATE TABLE "public"."offlinemsg" (
 "id" int4 DEFAULT nextval('msg_id_seq'::regclass) NOT NULL,
-"topic" varchar(64) COLLATE "default",
-"message" varchar(1024) COLLATE "default",
+"topic" varchar(512) COLLATE "default",
+"message" varchar(2048) COLLATE "default",
 "createtime" timestamp(6),
 "moditytime" timestamp(6),
 "status" int4,
 "counts" int4,
-"remark" varchar(256) COLLATE "default"
+"remark" varchar(1024) COLLATE "default",
+"clientid" varchar(256) COLLATE "default"
 )
 WITH (OIDS=FALSE)
 
@@ -153,7 +155,7 @@ CREATE TABLE "public"."software" (
 "softwaretype" varchar(16) COLLATE "default",
 "signflag" varchar(16) COLLATE "default",
 "qrcode" varchar(32) COLLATE "default",
-"qrpath" varchar(128) COLLATE "default"
+"qrpath" varchar(256) COLLATE "default"
 )
 WITH (OIDS=FALSE)
 
@@ -171,11 +173,11 @@ CREATE TABLE "public"."syslog" (
 "id" int4 DEFAULT nextval('syslog_id_seq'::regclass) NOT NULL,
 "option" varchar(128) COLLATE "default",
 "type" int4,
-"loginfo" varchar(64) COLLATE "default",
+"loginfo" varchar(1024) COLLATE "default",
 "timestamp" timestamp(6),
 "userid" int4,
 "userip" varchar(64) COLLATE "default",
-"remark" varchar(256) COLLATE "default"
+"remark" varchar(512) COLLATE "default"
 )
 WITH (OIDS=FALSE)
 
@@ -204,7 +206,7 @@ CREATE TABLE "public"."userinfo" (
 "lastlogintime" timestamp(6),
 "company" varchar(128) COLLATE "default",
 "project" varchar(128) COLLATE "default",
-"remark" varchar(256) COLLATE "default"
+"remark" varchar(512) COLLATE "default"
 )
 WITH (OIDS=FALSE)
 
