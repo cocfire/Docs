@@ -11,7 +11,7 @@ Target Server Type    : PGSQL
 Target Server Version : 90603
 File Encoding         : 65001
 
-Date: 2020-05-16 16:10:40
+Date: 2020-05-20 18:09:11
 */
 
 
@@ -23,8 +23,9 @@ CREATE SEQUENCE "public"."device_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 1
+ START 39
  CACHE 1;
+SELECT setval('"public"."device_id_seq"', 39, true);
 
 -- ----------------------------
 -- Sequence structure for msg_id_seq
@@ -34,8 +35,9 @@ CREATE SEQUENCE "public"."msg_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 1
+ START 17
  CACHE 1;
+SELECT setval('"public"."msg_id_seq"', 17, true);
 
 -- ----------------------------
 -- Sequence structure for software_id_seq
@@ -45,8 +47,9 @@ CREATE SEQUENCE "public"."software_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 1
+ START 4
  CACHE 1;
+SELECT setval('"public"."software_id_seq"', 4, true);
 
 -- ----------------------------
 -- Sequence structure for syslog_id_seq
@@ -56,8 +59,9 @@ CREATE SEQUENCE "public"."syslog_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 1
+ START 66
  CACHE 1;
+SELECT setval('"public"."syslog_id_seq"', 66, true);
 
 -- ----------------------------
 -- Table structure for device
@@ -107,6 +111,11 @@ CREATE TABLE "public"."device" (
 WITH (OIDS=FALSE)
 
 ;
+COMMENT ON COLUMN "public"."device"."facelibrid" IS '人脸库id';
+
+-- ----------------------------
+-- Records of device
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for offlinemsg
@@ -126,6 +135,10 @@ CREATE TABLE "public"."offlinemsg" (
 WITH (OIDS=FALSE)
 
 ;
+
+-- ----------------------------
+-- Records of offlinemsg
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for software
@@ -154,6 +167,10 @@ WITH (OIDS=FALSE)
 ;
 
 -- ----------------------------
+-- Records of software
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for syslog
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."syslog";
@@ -170,6 +187,10 @@ CREATE TABLE "public"."syslog" (
 WITH (OIDS=FALSE)
 
 ;
+
+-- ----------------------------
+-- Records of syslog
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for userinfo
@@ -199,7 +220,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 -- Records of userinfo
 -- ----------------------------
-INSERT INTO "public"."userinfo" VALUES ('888', null, 'admin', null, '4a78b66a0e09850c6f9c5a3d58a43205', null, '2020-04-28 03:42:22.984', '2020-04-28 03:42:22.984', '1', '0', null, null, null, null, null);
+INSERT INTO "public"."userinfo" VALUES ('888', null, 'admin', null, '4a78b66a0e09850c6f9c5a3d58a43205', null, '2020-04-28 03:42:22.984', '2020-05-19 16:56:05.319', '1', '0', '0:0:0:0:0:0:0:1', '2020-05-19 16:56:05.319', null, null, null);
 
 -- ----------------------------
 -- Alter Sequences Owned By 
