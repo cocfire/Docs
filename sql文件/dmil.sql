@@ -23,9 +23,9 @@ CREATE SEQUENCE "public"."device_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 39
+ START 1
  CACHE 1;
-SELECT setval('"public"."device_id_seq"', 39, true);
+SELECT setval('"public"."device_id_seq"', 1, true);
 
 -- ----------------------------
 -- Sequence structure for msg_id_seq
@@ -35,9 +35,9 @@ CREATE SEQUENCE "public"."msg_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 17
+ START 1
  CACHE 1;
-SELECT setval('"public"."msg_id_seq"', 17, true);
+SELECT setval('"public"."msg_id_seq"', 1, true);
 
 -- ----------------------------
 -- Sequence structure for software_id_seq
@@ -47,9 +47,9 @@ CREATE SEQUENCE "public"."software_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 4
+ START 1
  CACHE 1;
-SELECT setval('"public"."software_id_seq"', 4, true);
+SELECT setval('"public"."software_id_seq"', 1, true);
 
 -- ----------------------------
 -- Sequence structure for syslog_id_seq
@@ -59,9 +59,9 @@ CREATE SEQUENCE "public"."syslog_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 66
+ START 1
  CACHE 1;
-SELECT setval('"public"."syslog_id_seq"', 66, true);
+SELECT setval('"public"."syslog_id_seq"', 1, true);
 
 -- ----------------------------
 -- Table structure for device
