@@ -35,7 +35,8 @@ CREATE TABLE "public"."software" (
 "softwaretype" varchar(16) COLLATE "default",
 "signflag" varchar(16) COLLATE "default",
 "qrcode" varchar(32) COLLATE "default",
-"qrpath" varchar(128) COLLATE "default"
+"qrpath" varchar(512) COLLATE "default",
+"remark" varchar(1024) COLLATE "default"
 )
 WITH (OIDS=FALSE)
 
