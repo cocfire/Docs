@@ -63,6 +63,24 @@ CREATE SEQUENCE "public"."syslog_id_seq"
  CACHE 1;
 SELECT setval('"public"."syslog_id_seq"', 1, true);
 
+DROP SEQUENCE IF EXISTS "public"."user_id_seq";
+CREATE SEQUENCE "public"."user_id_seq"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 1000
+ CACHE 1;
+SELECT setval('"public"."user_id_seq"', 1, true);
+
+DROP SEQUENCE IF EXISTS "public"."menu_id_seq";
+CREATE SEQUENCE "public"."menu_id_seq"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 10
+ CACHE 1;
+SELECT setval('"public"."menu_id_seq"', 1, true);
+
 -- ----------------------------
 -- Table structure for device
 -- ----------------------------
@@ -85,6 +103,7 @@ CREATE TABLE "public"."device" (
 "orderid" varchar(16) COLLATE "default",
 "projectid" int4,
 "projectname" varchar(32) COLLATE "default",
+"companyid" int4,
 "companyname" varchar(256) COLLATE "default",
 "clientname" varchar(64) COLLATE "default",
 "clientcode" varchar(32) COLLATE "default",
@@ -199,7 +218,7 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."userinfo";
 CREATE TABLE "public"."userinfo" (
-"id" int4 NOT NULL,
+"id" int4 DEFAULT nextval('user_id_seq'::regclass) NOT NULL,
 "openid" int4,
 "username" varchar(64) COLLATE "default",
 "realname" varchar(64) COLLATE "default",
@@ -219,10 +238,32 @@ WITH (OIDS=FALSE)
 
 ;
 
+
 -- ----------------------------
 -- Records of userinfo
 -- ----------------------------
 INSERT INTO "public"."userinfo" VALUES ('888', null, 'admin', null, '4a78b66a0e09850c6f9c5a3d58a43205', null, '2020-04-28 03:42:22.984', '2020-05-19 16:56:05.319', '1', '0', '0:0:0:0:0:0:0:1', '2020-05-19 16:56:05.319', null, null, null);
+
+
+-- ----------------------------
+-- Table structure for menu
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."menu";
+CREATE TABLE "public"."menu" (
+"id" int4 DEFAULT nextval('menu_id_seq'::regclass) NOT NULL,
+"name" varchar(1024) COLLATE "default",
+"rank" int4,
+"pid" int4,
+"menuorder" varchar(255) COLLATE "default",
+"path" varchar(255) COLLATE "default",
+"createtime" timestamp(6),
+"modifytime" timestamp(6),
+"status" int4,
+"remark" varchar(512) COLLATE "default"
+)
+WITH (OIDS=FALSE)
+
+;
 
 -- ----------------------------
 -- Alter Sequences Owned By 
@@ -252,3 +293,8 @@ ALTER TABLE "public"."syslog" ADD PRIMARY KEY ("id");
 -- Primary Key structure for table userinfo
 -- ----------------------------
 ALTER TABLE "public"."userinfo" ADD PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table menu
+-- ----------------------------
+ALTER TABLE "public"."menu" ADD PRIMARY KEY ("id");
