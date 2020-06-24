@@ -63,6 +63,9 @@ CREATE SEQUENCE "public"."syslog_id_seq"
  CACHE 1;
 SELECT setval('"public"."syslog_id_seq"', 1, true);
 
+-- ----------------------------
+-- Sequence structure for user_id_seq
+-- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."user_id_seq";
 CREATE SEQUENCE "public"."user_id_seq"
  INCREMENT 1
@@ -72,6 +75,9 @@ CREATE SEQUENCE "public"."user_id_seq"
  CACHE 1;
 SELECT setval('"public"."user_id_seq"', 1, true);
 
+-- ----------------------------
+-- Sequence structure for menu_id_seq
+-- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."menu_id_seq";
 CREATE SEQUENCE "public"."menu_id_seq"
  INCREMENT 1
@@ -80,6 +86,18 @@ CREATE SEQUENCE "public"."menu_id_seq"
  START 10
  CACHE 1;
 SELECT setval('"public"."menu_id_seq"', 1, true);
+
+-- ----------------------------
+-- Sequence structure for menu_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."devicesw_id_seq";
+CREATE SEQUENCE "public"."devicesw_id_seq"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 10
+ CACHE 1;
+SELECT setval('"public"."devicesw_id_seq"', 1, true);
 
 -- ----------------------------
 -- Table structure for device
@@ -265,6 +283,27 @@ WITH (OIDS=FALSE)
 
 ;
 
+
+-- ----------------------------
+-- Table structure for devicesw
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."devicesw";
+CREATE TABLE "public"."devicesw" (
+"id" int4 DEFAULT nextval('devicesw_id_seq'::regclass) NOT NULL,
+"deviceid" int4,
+"softwarename" varchar(64) COLLATE "default",
+"erpcode" varchar(32) COLLATE "default",
+"softwareversion" varchar(32) COLLATE "default",
+"remark" varchar(512) COLLATE "default",
+"status" int4,
+"createtime" timestamp(6),
+"moditytime" timestamp(6)
+)
+WITH (OIDS=FALSE)
+
+;
+
+
 -- ----------------------------
 -- Alter Sequences Owned By 
 -- ----------------------------
@@ -298,3 +337,8 @@ ALTER TABLE "public"."userinfo" ADD PRIMARY KEY ("id");
 -- Primary Key structure for table menu
 -- ----------------------------
 ALTER TABLE "public"."menu" ADD PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table devicesw
+-- ----------------------------
+ALTER TABLE "public"."devicesw" ADD PRIMARY KEY ("id");
