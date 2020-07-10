@@ -88,7 +88,7 @@ CREATE SEQUENCE "public"."menu_id_seq"
 SELECT setval('"public"."menu_id_seq"', 1, true);
 
 -- ----------------------------
--- Sequence structure for menu_id_seq
+-- Sequence structure for devicesw_id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."devicesw_id_seq";
 CREATE SEQUENCE "public"."devicesw_id_seq"
@@ -98,6 +98,18 @@ CREATE SEQUENCE "public"."devicesw_id_seq"
  START 10
  CACHE 1;
 SELECT setval('"public"."devicesw_id_seq"', 1, true);
+
+-- ----------------------------
+-- Sequence structure for vrdevice_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."vrdevice_id_seq";
+CREATE SEQUENCE "public"."vrdevice_id_seq"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 10
+ CACHE 1;
+SELECT setval('"public"."vrdevice_id_seq"', 1, true);
 
 -- ----------------------------
 -- Table structure for device
@@ -303,6 +315,25 @@ WITH (OIDS=FALSE)
 
 ;
 
+-- ----------------------------
+-- Table structure for vrdevice
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."vrdevice";
+CREATE TABLE "public"."vrdevice" (
+"id" int4 DEFAULT nextval('vrdevice_id_seq'::regclass) NOT NULL,
+"vrdeviceid" varchar(256) COLLATE "default",
+"name" varchar(128) COLLATE "default",
+"type" varchar(16) COLLATE "default",
+"info" varchar(2048) COLLATE "default",
+"remark" varchar(512) COLLATE "default",
+"status" int4,
+"createtime" timestamp(6),
+"updatetime" timestamp(6),
+"link" varchar(1024) COLLATE "default",
+"version" varchar(16) COLLATE "default"
+)
+WITH (OIDS=FALSE)
+
 
 -- ----------------------------
 -- Alter Sequences Owned By 
@@ -342,3 +373,8 @@ ALTER TABLE "public"."menu" ADD PRIMARY KEY ("id");
 -- Primary Key structure for table devicesw
 -- ----------------------------
 ALTER TABLE "public"."devicesw" ADD PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table vrdevice
+-- ----------------------------
+ALTER TABLE "public"."vrdevice" ADD PRIMARY KEY ("id");
