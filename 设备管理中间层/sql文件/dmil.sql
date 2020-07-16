@@ -295,6 +295,9 @@ WITH (OIDS=FALSE)
 
 ;
 
+-- ----------------------------
+-- Records of menu
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for devicesw
@@ -316,6 +319,10 @@ WITH (OIDS=FALSE)
 ;
 
 -- ----------------------------
+-- Records of devicesw
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for vrdevice
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."vrdevice";
@@ -334,6 +341,10 @@ CREATE TABLE "public"."vrdevice" (
 )
 WITH (OIDS=FALSE)
 
+;
+-- ----------------------------
+-- Records of vrdevice
+-- ----------------------------
 
 -- ----------------------------
 -- Alter Sequences Owned By 
