@@ -125,7 +125,7 @@ CREATE TABLE "public"."device" (
 "terminfo" varchar(256) COLLATE "default",
 "macaddress" varchar(64) COLLATE "default",
 "hardwarename" varchar(32) COLLATE "default",
-"machinetype" varchar(16) COLLATE "default",
+"machinetype" varchar(64) COLLATE "default",
 "licencecode" varchar(32) COLLATE "default",
 "softwarename" varchar(64) COLLATE "default",
 "erpcode" varchar(32) COLLATE "default",
