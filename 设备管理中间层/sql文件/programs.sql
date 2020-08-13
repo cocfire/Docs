@@ -30,7 +30,8 @@ CREATE TABLE "public"."programs" (
 "createtime" timestamp(6),
 "modifytime" timestamp(6),
 "fitmodel" varchar(1024) COLLATE "default",
-"remark" varchar(512) COLLATE "default"
+"remark" varchar(512) COLLATE "default",
+"createuser" int4
 )
 WITH (OIDS=FALSE)
 
@@ -41,6 +42,6 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 
 -- ----------------------------
--- Primary Key structure for table programs
+-- Pricreateuserary Key structure for table programs
 -- ----------------------------
 ALTER TABLE "public"."programs" ADD PRIMARY KEY ("id");
