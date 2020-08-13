@@ -112,6 +112,30 @@ CREATE SEQUENCE "public"."vrdevice_id_seq"
 SELECT setval('"public"."vrdevice_id_seq"', 1, true);
 
 -- ----------------------------
+-- Sequence structure for file_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."file_id_seq";
+CREATE SEQUENCE "public"."file_id_seq"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 10
+ CACHE 1;
+SELECT setval('"public"."file_id_seq"', 1, true);
+
+-- ----------------------------
+-- Sequence structure for program_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."program_id_seq";
+CREATE SEQUENCE "public"."program_id_seq"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 10
+ CACHE 1;
+SELECT setval('"public"."program_id_seq"', 1, true);
+
+-- ----------------------------
 -- Table structure for device
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."device";
@@ -347,6 +371,54 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for fileinfo
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."fileinfo";
+CREATE TABLE "public"."fileinfo" (
+"id" int4 DEFAULT nextval('file_id_seq'::regclass) NOT NULL,
+"filename" varchar(128) COLLATE "default",
+"filesize" varchar(32) COLLATE "default",
+"filetype" int4,
+"filepath" varchar(512) COLLATE "default",
+"uploadname" varchar(128) COLLATE "default",
+"uploadtime" timestamp(6),
+"downstatus" int4,
+"md5size" varchar(32) COLLATE "default",
+"fitmodel" varchar(1024) COLLATE "default",
+"remark" varchar(512) COLLATE "default"
+)
+WITH (OIDS=FALSE)
+
+;
+-- ----------------------------
+-- Records of fileinfo
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for programs
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."programs";
+CREATE TABLE "public"."programs" (
+"id" int4 DEFAULT nextval('program_id_seq'::regclass) NOT NULL,
+"name" varchar(256) COLLATE "default",
+"type" int4,
+"fileids" varchar(1024) COLLATE "default",
+"timelast" varchar(1024) COLLATE "default",
+"starttime" timestamp(6),
+"endtime" timestamp(6),
+"createtime" timestamp(6),
+"modifytime" timestamp(6),
+"fitmodel" varchar(1024) COLLATE "default",
+"remark" varchar(512) COLLATE "default"
+)
+WITH (OIDS=FALSE)
+
+;
+-- ----------------------------
+-- Records of programs
+-- ----------------------------
+
+-- ----------------------------
 -- Alter Sequences Owned By 
 -- ----------------------------
 
@@ -389,3 +461,13 @@ ALTER TABLE "public"."devicesw" ADD PRIMARY KEY ("id");
 -- Primary Key structure for table vrdevice
 -- ----------------------------
 ALTER TABLE "public"."vrdevice" ADD PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table fileinfo
+-- ----------------------------
+ALTER TABLE "public"."fileinfo" ADD PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table programs
+-- ----------------------------
+ALTER TABLE "public"."programs" ADD PRIMARY KEY ("id");
