@@ -1,9 +1,9 @@
 /*
 Navicat PGSQL Data Transfer
 
-Source Server         : 172.16.42.104
+Source Server         : 172.16.43.94
 Source Server Version : 90603
-Source Host           : 172.16.42.104:5432
+Source Host           : 172.16.43.94:5432
 Source Database       : dmil
 Source Schema         : public
 
@@ -11,7 +11,7 @@ Target Server Type    : PGSQL
 Target Server Version : 90603
 File Encoding         : 65001
 
-Date: 2020-08-13 15:12:49
+Date: 2020-08-14 16:49:29
 */
 
 
@@ -30,7 +30,8 @@ CREATE TABLE "public"."fileinfo" (
 "downstatus" int4,
 "md5size" varchar(32) COLLATE "default",
 "fitmodel" varchar(1024) COLLATE "default",
-"remark" varchar(512) COLLATE "default"
+"remark" varchar(512) COLLATE "default",
+"userid" int4
 )
 WITH (OIDS=FALSE)
 

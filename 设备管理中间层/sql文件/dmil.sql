@@ -385,7 +385,8 @@ CREATE TABLE "public"."fileinfo" (
 "downstatus" int4,
 "md5size" varchar(32) COLLATE "default",
 "fitmodel" varchar(1024) COLLATE "default",
-"remark" varchar(512) COLLATE "default"
+"remark" varchar(512) COLLATE "default",
+"userid" int4
 )
 WITH (OIDS=FALSE)
 
@@ -410,7 +411,9 @@ CREATE TABLE "public"."programs" (
 "modifytime" timestamp(6),
 "fitmodel" varchar(1024) COLLATE "default",
 "remark" varchar(512) COLLATE "default",
-"createuser" int4
+"createuser" int4,
+"companyid" int4,
+"projectid" int4
 )
 WITH (OIDS=FALSE)
 
