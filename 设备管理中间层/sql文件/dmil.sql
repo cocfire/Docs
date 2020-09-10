@@ -174,7 +174,7 @@ CREATE TABLE "public"."device" (
 "lanip" varchar(32) COLLATE "default",
 "wifiip" varchar(32) COLLATE "default",
 "emqversion" varchar(16) COLLATE "default",
-"deviceid" varchar(32) COLLATE "default",
+"deviceid" varchar(256) COLLATE "default",
 "imei" varchar(256) COLLATE "default",
 "udid" varchar(256) COLLATE "default",
 "uuid" varchar(256) COLLATE "default",
