@@ -410,7 +410,7 @@ CREATE TABLE "public"."programs" (
 "createtime" timestamp(6),
 "modifytime" timestamp(6),
 "fitmodel" varchar(1024) COLLATE "default",
-"remark" varchar(512) COLLATE "default",
+"remark" varchar(4096) COLLATE "default",
 "createuser" int4,
 "companyid" int4,
 "projectid" int4
