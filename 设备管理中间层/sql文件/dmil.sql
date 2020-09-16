@@ -73,7 +73,7 @@ CREATE SEQUENCE "public"."user_id_seq"
  MAXVALUE 9223372036854775807
  START 1000
  CACHE 1;
-SELECT setval('"public"."user_id_seq"', 1, true);
+SELECT setval('"public"."user_id_seq"', 1000, true);
 
 -- ----------------------------
 -- Sequence structure for menu_id_seq
@@ -85,7 +85,7 @@ CREATE SEQUENCE "public"."menu_id_seq"
  MAXVALUE 9223372036854775807
  START 10
  CACHE 1;
-SELECT setval('"public"."menu_id_seq"', 1, true);
+SELECT setval('"public"."menu_id_seq"', 10, true);
 
 -- ----------------------------
 -- Sequence structure for devicesw_id_seq
@@ -95,7 +95,7 @@ CREATE SEQUENCE "public"."devicesw_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 10
+ START 1
  CACHE 1;
 SELECT setval('"public"."devicesw_id_seq"', 1, true);
 
@@ -107,7 +107,7 @@ CREATE SEQUENCE "public"."vrdevice_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 10
+ START 1
  CACHE 1;
 SELECT setval('"public"."vrdevice_id_seq"', 1, true);
 
@@ -119,7 +119,7 @@ CREATE SEQUENCE "public"."file_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 10
+ START 1
  CACHE 1;
 SELECT setval('"public"."file_id_seq"', 1, true);
 
@@ -131,7 +131,7 @@ CREATE SEQUENCE "public"."program_id_seq"
  INCREMENT 1
  MINVALUE 1
  MAXVALUE 9223372036854775807
- START 10
+ START 1
  CACHE 1;
 SELECT setval('"public"."program_id_seq"', 1, true);
 
