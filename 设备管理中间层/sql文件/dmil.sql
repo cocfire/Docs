@@ -197,7 +197,7 @@ DROP TABLE IF EXISTS "public"."offlinemsg";
 CREATE TABLE "public"."offlinemsg" (
 "id" int4 DEFAULT nextval('msg_id_seq'::regclass) NOT NULL,
 "topic" varchar(512) COLLATE "default",
-"message" varchar(2048) COLLATE "default",
+"message" varchar(10240) COLLATE "default",
 "createtime" timestamp(6),
 "moditytime" timestamp(6),
 "status" int4,
@@ -234,7 +234,7 @@ CREATE TABLE "public"."software" (
 "signflag" varchar(16) COLLATE "default",
 "qrcode" varchar(32) COLLATE "default",
 "qrpath" varchar(512) COLLATE "default",
-"fitmodel" varchar(1024) COLLATE "default",
+"fitmodel" varchar(10240) COLLATE "default",
 "remark" varchar(1024) COLLATE "default"
 )
 WITH (OIDS=FALSE)
@@ -253,7 +253,7 @@ CREATE TABLE "public"."syslog" (
 "id" int4 DEFAULT nextval('syslog_id_seq'::regclass) NOT NULL,
 "option" varchar(128) COLLATE "default",
 "type" int4,
-"loginfo" varchar(1024) COLLATE "default",
+"loginfo" varchar(10240) COLLATE "default",
 "timestamp" timestamp(6),
 "userid" int4,
 "userip" varchar(64) COLLATE "default",
@@ -384,7 +384,7 @@ CREATE TABLE "public"."fileinfo" (
 "uploadtime" timestamp(6),
 "downstatus" int4,
 "md5size" varchar(32) COLLATE "default",
-"fitmodel" varchar(1024) COLLATE "default",
+"fitmodel" varchar(10240) COLLATE "default",
 "remark" varchar(512) COLLATE "default",
 "userid" int4
 )
@@ -403,14 +403,14 @@ CREATE TABLE "public"."programs" (
 "id" int4 DEFAULT nextval('program_id_seq'::regclass) NOT NULL,
 "name" varchar(256) COLLATE "default",
 "type" int4,
-"fileids" varchar(1024) COLLATE "default",
-"timelast" varchar(1024) COLLATE "default",
+"fileids" varchar(10240) COLLATE "default",
+"timelast" varchar(10240) COLLATE "default",
 "starttime" timestamp(6),
 "endtime" timestamp(6),
 "createtime" timestamp(6),
 "modifytime" timestamp(6),
-"fitmodel" varchar(1024) COLLATE "default",
-"remark" varchar(4096) COLLATE "default",
+"fitmodel" varchar(10240) COLLATE "default",
+"remark" varchar(10240) COLLATE "default",
 "createuser" int4,
 "companyid" int4,
 "projectid" int4
