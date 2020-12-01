@@ -1,0 +1,2802 @@
+<!DOCTYPE html>
+      <html>
+      <head>
+      <title>WebAPI_1.0</title>
+      <meta charset="utf-8" />
+      <style>@charset "UTF-8";
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* 外层轨道 */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset006pxrgba(255, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif;
+  font-size: 13px;
+  line-height: 25px;
+  color: #393838;
+  position: relative;
+}
+
+table {
+  margin: 10px 0 15px 0;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  border: 1px solid #ddd;
+  padding: 3px 10px;
+}
+
+th {
+  padding: 5px 10px;
+}
+
+a, a:link, a:visited {
+  color: #34495e;
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  color: #59d69d;
+  text-decoration: none;
+}
+
+a img {
+  border: none;
+}
+
+p {
+  padding-left: 10px;
+  margin-bottom: 9px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #404040;
+  line-height: 36px;
+}
+
+h1 {
+  color: #2c3e50;
+  font-weight: 600;
+  margin-bottom: 16px;
+  font-size: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ddd;
+  line-height: 50px;
+}
+
+h2 {
+  font-size: 28px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+h3 {
+  clear: both;
+  font-weight: 400;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-left: 3px solid #59d69d;
+  padding-left: 8px;
+  font-size: 18px;
+}
+
+h4 {
+  font-size: 16px;
+}
+
+h5 {
+  font-size: 14px;
+}
+
+h6 {
+  font-size: 13px;
+}
+
+hr {
+  margin: 0 0 19px;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+}
+
+blockquote {
+  padding: 13px 13px 21px 15px;
+  margin-bottom: 18px;
+  font-family: georgia, serif;
+  font-style: italic;
+}
+
+blockquote:before {
+  font-size: 40px;
+  margin-left: -10px;
+  font-family: georgia, serif;
+  color: #eee;
+}
+
+blockquote p {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 18px;
+  margin-bottom: 0;
+  font-style: italic;
+}
+
+code,
+pre {
+  font-family: Monaco, Andale Mono, Courier New, monospace;
+}
+
+code {
+  background-color: #fee9cc;
+  color: rgba(0, 0, 0, 0.75);
+  padding: 1px 3px;
+  font-size: 12px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+pre {
+  display: block;
+  padding: 14px;
+  margin: 0 0 18px;
+  line-height: 16px;
+  font-size: 11px;
+  border: 1px solid #d9d9d9;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background: #f6f6f6;
+}
+
+pre code {
+  background-color: #f6f6f6;
+  color: #737373;
+  font-size: 11px;
+  padding: 0;
+}
+
+sup {
+  font-size: 0.83em;
+  vertical-align: super;
+  line-height: 0;
+}
+
+* {
+  -webkit-print-color-adjust: exact;
+}
+
+@media print {
+  body,
+  code,
+  pre code,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: black;
+  }
+
+  table,
+  pre {
+    page-break-inside: avoid;
+  }
+}
+html,
+body {
+  height: 100%;
+}
+
+.table-of-contents {
+  position: fixed;
+  top: 61px;
+  left: 0;
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 260px;
+}
+
+.table-of-contents > ul > li > a {
+  font-size: 20px;
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+.table-of-contents ul {
+  overflow: auto;
+  margin: 0px;
+  height: 100%;
+  padding: 0px 0px;
+  box-sizing: border-box;
+  list-style-type: none;
+}
+
+.table-of-contents ul li {
+  padding-left: 20px;
+}
+
+.table-of-contents a {
+  padding: 2px 0px;
+  display: block;
+  text-decoration: none;
+}
+
+.content-right {
+  max-width: 700px;
+  margin-left: 290px;
+  padding-left: 70px;
+  flex-grow: 1;
+}
+.content-right h2:target {
+  padding-top: 80px;
+}
+
+body > p {
+  margin-left: 30px;
+}
+
+body > table {
+  margin-left: 30px;
+}
+
+body > pre {
+  margin-left: 30px;
+}
+
+.curProject {
+  position: fixed;
+  top: 20px;
+  font-size: 25px;
+  color: black;
+  margin-left: -240px;
+  width: 240px;
+  padding: 5px;
+  line-height: 25px;
+  box-sizing: border-box;
+}
+
+.g-doc {
+  margin-top: 56px;
+  padding-top: 24px;
+  display: flex;
+}
+
+.curproject-name {
+  font-size: 42px;
+}
+
+.m-header {
+  background: #32363a;
+  height: 56px;
+  line-height: 56px;
+  padding-left: 60px;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.m-header .title {
+  font-size: 22px;
+  color: #fff;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  margin-left: 16px;
+  padding: 0;
+  line-height: 56px;
+  border: none;
+}
+.m-header .nav {
+  color: #fff;
+  font-size: 16px;
+  position: absolute;
+  right: 32px;
+  top: 0;
+}
+.m-header .nav a {
+  color: #fff;
+  margin-left: 16px;
+  padding: 8px;
+  transition: color .2s;
+}
+.m-header .nav a:hover {
+  color: #59d69d;
+}
+
+.m-footer {
+  border-top: 1px solid #ddd;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+/*# sourceMappingURL=defaultTheme.css.map */
+</style>
+      </head>
+      <body>
+        <div class="m-header">
+          <a href="#" style="display: inherit;"><svg class="svg" width="32px" height="32px" viewBox="0 0 64 64" version="1.1"><title>Icon</title><desc>Created with Sketch.</desc><defs><linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1"><stop stop-color="#FFFFFF" offset="0%"></stop><stop stop-color="#F2F2F2" offset="100%"></stop></linearGradient><circle id="path-2" cx="31.9988602" cy="31.9988602" r="2.92886048"></circle><filter x="-85.4%" y="-68.3%" width="270.7%" height="270.7%" filterUnits="objectBoundingBox" id="filter-3"><feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset><feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur><feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.159703351 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix></filter></defs><g id="首页" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="大屏幕"><g id="Icon"><circle id="Oval-1" fill="url(#linearGradient-1)" cx="32" cy="32" r="32"></circle><path d="M36.7078009,31.8054514 L36.7078009,51.7110548 C36.7078009,54.2844537 34.6258634,56.3695395 32.0579205,56.3695395 C29.4899777,56.3695395 27.4099998,54.0704461 27.4099998,51.7941246 L27.4099998,31.8061972 C27.4099998,29.528395 29.4909575,27.218453 32.0589004,27.230043 C34.6268432,27.241633 36.7078009,29.528395 36.7078009,31.8054514 Z" id="blue" fill="#2359F1" fill-rule="nonzero"></path><path d="M45.2586091,17.1026914 C45.2586091,17.1026914 45.5657231,34.0524383 45.2345291,37.01141 C44.9033351,39.9703817 43.1767091,41.6667796 40.6088126,41.6667796 C38.040916,41.6667796 35.9609757,39.3676862 35.9609757,37.0913646 L35.9609757,17.1034372 C35.9609757,14.825635 38.0418959,12.515693 40.6097924,12.527283 C43.177689,12.538873 45.2586091,14.825635 45.2586091,17.1026914 Z" id="green" fill="#57CF27" fill-rule="nonzero" transform="translate(40.674608, 27.097010) rotate(60.000000) translate(-40.674608, -27.097010) "></path><path d="M28.0410158,17.0465598 L28.0410158,36.9521632 C28.0410158,39.525562 25.9591158,41.6106479 23.3912193,41.6106479 C20.8233227,41.6106479 18.7433824,39.3115545 18.7433824,37.035233 L18.7433824,17.0473055 C18.7433824,14.7695034 20.8243026,12.4595614 23.3921991,12.4711513 C25.9600956,12.4827413 28.0410158,14.7695034 28.0410158,17.0465598 Z" id="red" fill="#FF561B" fill-rule="nonzero" transform="translate(23.392199, 27.040878) rotate(-60.000000) translate(-23.392199, -27.040878) "></path><g id="inner-round"><use fill="black" fill-opacity="1" filter="url(#filter-3)" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#path-2"></use><use fill="#F7F7F7" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#path-2"></use></g></g></g></g></svg></a>
+          <a href="#"><h1 class="title">YAPI 接口文档</h1></a>
+          <div class="nav">
+            <a href="https://hellosean1025.github.io/yapi/">YApi</a>
+          </div>
+        </div>
+        <div class="g-doc">
+          <div class="table-of-contents"><ul><li><a href="#u8ba4u8bc1u7ba1u7406u63a5u53e3">认证管理接口</a><ul><li><a href="#u767bu5f55u9274u6743u6311u62180a3ca20id3du767bu5f55u9274u6743u6311u62183e203ca3e">登录鉴权挑战
+<a id=登录鉴权挑战> </a></a></li><li><a href="#u8bbeu5907u767bu5f550a3ca20id3du8bbeu5907u767bu5f553e203ca3e">设备登录
+<a id=设备登录> </a></a></li></ul></li><li><a href="#u8bbeu5907u7ba1u7406u63a5u53e3">设备管理接口</a><ul><li><a href="#u83b7u53d6u8bbeu5907u72b6u6001u4fe1u606f0a3ca20id3du83b7u53d6u8bbeu5907u72b6u6001u4fe1u606f3e203ca3e">获取设备状态信息
+<a id=获取设备状态信息> </a></a></li><li><a href="#u83b7u53d6u8bbeu5907u8d44u6e90u548cu80fdu529b0a3ca20id3du83b7u53d6u8bbeu5907u8d44u6e90u548cu80fdu529b3e203ca3e">获取设备资源和能力
+<a id=获取设备资源和能力> </a></a></li><li><a href="#u4e0au4f20u5347u7ea7u6587u4ef60a3ca20id3du4e0au4f20u5347u7ea7u6587u4ef63e203ca3e">上传升级文件
+<a id=上传升级文件> </a></a></li><li><a href="#u5347u7ea7u8fdbu5ea6u67e5u8be20a3ca20id3du5347u7ea7u8fdbu5ea6u67e5u8be23e203ca3e">升级进度查询
+<a id=升级进度查询> </a></a></li><li><a href="#u8fdcu7a0bu91cdu542fu8bbeu59070a3ca20id3du8fdcu7a0bu91cdu542fu8bbeu59073e203ca3e">远程重启设备
+<a id=远程重启设备> </a></a></li><li><a href="#u8fdcu7a0bu6062u590du8bbeu5907u51fau5382u503c0a3ca20id3du8fdcu7a0bu6062u590du8bbeu5907u51fau5382u503c3e203ca3e">远程恢复设备出厂值
+<a id=远程恢复设备出厂值> </a></a></li><li><a href="#u83b7u53d6u7f51u7edcu53c2u65700a3ca20id3du83b7u53d6u7f51u7edcu53c2u65703e203ca3e">获取网络参数
+<a id=获取网络参数> </a></a></li><li><a href="#u8bbeu7f6eu7f51u7edcu53c2u65700a3ca20id3du8bbeu7f6eu7f51u7edcu53c2u65703e203ca3e">设置网络参数
+<a id=设置网络参数> </a></a></li><li><a href="#u83b7u53d6u8bbeu5907u65f6u95f40a3ca20id3du83b7u53d6u8bbeu5907u65f6u95f43e203ca3e">获取设备时间
+<a id=获取设备时间> </a></a></li><li><a href="#u8bbeu7f6eu8bbeu5907u65f6u95f40a3ca20id3du8bbeu7f6eu8bbeu5907u65f6u95f43e203ca3e">设置设备时间
+<a id=设置设备时间> </a></a></li><li><a href="#u83b7u53d6u4ebau8138u548cu8bc6u522bu53c2u65700a3ca20id3du83b7u53d6u4ebau8138u548cu8bc6u522bu53c2u65703e203ca3e">获取人脸和识别参数
+<a id=获取人脸和识别参数> </a></a></li><li><a href="#u8bbeu7f6eu4ebau8138u548cu8bc6u522bu53c2u65700a3ca20id3du8bbeu7f6eu4ebau8138u548cu8bc6u522bu53c2u65703e203ca3e">设置人脸和识别参数
+<a id=设置人脸和识别参数> </a></a></li><li><a href="#u83b7u53d6u8bbeu5907u95e8u7981u53c2u65700a3ca20id3du83b7u53d6u8bbeu5907u95e8u7981u53c2u65703e203ca3e">获取设备门禁参数
+<a id=获取设备门禁参数> </a></a></li><li><a href="#u8bbeu7f6eu8bbeu5907u95e8u7981u53c2u65700a3ca20id3du8bbeu7f6eu8bbeu5907u95e8u7981u53c2u65703e203ca3e">设置设备门禁参数
+<a id=设置设备门禁参数> </a></a></li><li><a href="#u83b7u53d6u8bbeu5907u4e2au6027u53c2u65700a3ca20id3du83b7u53d6u8bbeu5907u4e2au6027u53c2u65703e203ca3e">获取设备个性参数
+<a id=获取设备个性参数> </a></a></li><li><a href="#u8bbeu7f6eu8bbeu5907u4e2au6027u53c2u65700a3ca20id3du8bbeu7f6eu8bbeu5907u4e2au6027u53c2u65703e203ca3e">设置设备个性参数
+<a id=设置设备个性参数> </a></a></li><li><a href="#u83b7u53d6u62a5u8b66u53c2u65700a3ca20id3du83b7u53d6u62a5u8b66u53c2u65703e203ca3e">获取报警参数
+<a id=获取报警参数> </a></a></li><li><a href="#u8bbeu7f6eu62a5u8b66u53c2u65700a3ca20id3du8bbeu7f6eu62a5u8b66u53c2u65703e203ca3e">设置报警参数
+<a id=设置报警参数> </a></a></li><li><a href="#u89e6u53d1u8bbeu5907iou64cdu4f5c0a3ca20id3du89e6u53d1u8bbeu5907iou64cdu4f5c3e203ca3e">触发设备IO操作
+<a id=触发设备IO操作> </a></a></li><li><a href="#u83b7u53d6u5468u8fb9u901au8bafu63a5u53e3u53c2u65700a3ca20id3du83b7u53d6u5468u8fb9u901au8bafu63a5u53e3u53c2u65703e203ca3e">获取周边通讯接口参数
+<a id=获取周边通讯接口参数> </a></a></li><li><a href="#u8bbeu7f6eu5468u8fb9u901au8bafu63a5u53e3u53c2u65700a3ca20id3du8bbeu7f6eu5468u8fb9u901au8bafu63a5u53e3u53c2u65703e203ca3e">设置周边通讯接口参数
+<a id=设置周边通讯接口参数> </a></a></li></ul></li><li><a href="#u4ebau5458u7ba1u7406u63a5u53e3">人员管理接口</a><ul><li><a href="#u6761u4ef6u67e5u8be2u4ebau5458u4fe1u606f0a3ca20id3du6761u4ef6u67e5u8be2u4ebau5458u4fe1u606f3e203ca3e">条件查询人员信息
+<a id=条件查询人员信息> </a></a></li><li><a href="#u521bu5efau4ebau5458u4fe1u606f0a3ca20id3du521bu5efau4ebau5458u4fe1u606f3e203ca3e">创建人员信息
+<a id=创建人员信息> </a></a></li><li><a href="#u83b7u53d6u6307u5b9aidu7684u4ebau5458u4fe1u606f0a3ca20id3du83b7u53d6u6307u5b9aidu7684u4ebau5458u4fe1u606f3e203ca3e">获取指定id的人员信息
+<a id=获取指定id的人员信息> </a></a></li><li><a href="#u8bbeu7f6eu6307u5b9aidu7684u4ebau5458u4fe1u606f0a3ca20id3du8bbeu7f6eu6307u5b9aidu7684u4ebau5458u4fe1u606f3e203ca3e">设置指定id的人员信息
+<a id=设置指定id的人员信息> </a></a></li><li><a href="#u5220u9664u6307u5b9aidu7684u4ebau5458u4fe1u606f0a3ca20id3du5220u9664u6307u5b9aidu7684u4ebau5458u4fe1u606f3e203ca3e">删除指定id的人员信息
+<a id=删除指定id的人员信息> </a></a></li></ul></li><li><a href="#u4ebau5458u7ec4u7ba1u7406u63a5u53e3">人员组管理接口</a><ul><li><a href="#u6761u4ef6u67e5u8be2u4ebau5458u7ec4u4fe1u606f0a3ca20id3du6761u4ef6u67e5u8be2u4ebau5458u7ec4u4fe1u606f3e203ca3e">条件查询人员组信息
+<a id=条件查询人员组信息> </a></a></li><li><a href="#u521bu5efau4ebau5458u7ec40a3ca20id3du521bu5efau4ebau5458u7ec43e203ca3e">创建人员组
+<a id=创建人员组> </a></a></li><li><a href="#u83b7u53d6u6307u5b9aidu7684u4ebau5458u7ec4u4fe1u606f0a3ca20id3du83b7u53d6u6307u5b9aidu7684u4ebau5458u7ec4u4fe1u606f3e203ca3e">获取指定id的人员组信息
+<a id=获取指定id的人员组信息> </a></a></li><li><a href="#u8bbeu7f6eu6307u5b9aidu7684u4ebau5458u7ec4u4fe1u606f0a3ca20id3du8bbeu7f6eu6307u5b9aidu7684u4ebau5458u7ec4u4fe1u606f3e203ca3e">设置指定id的人员组信息
+<a id=设置指定id的人员组信息> </a></a></li><li><a href="#u5220u9664u6307u5b9aidu7684u4ebau5458u7ec40a3ca20id3du5220u9664u6307u5b9aidu7684u4ebau5458u7ec43e203ca3e">删除指定id的人员组
+<a id=删除指定id的人员组> </a></a></li></ul></li><li><a href="#u95e8u7981u8ba1u5212u7ba1u7406u63a5u53e3">门禁计划管理接口</a><ul><li><a href="#u67e5u8be2u95e8u7981u8ba1u5212u4fe1u606f0a3ca20id3du67e5u8be2u95e8u7981u8ba1u5212u4fe1u606f3e203ca3e">查询门禁计划信息
+<a id=查询门禁计划信息> </a></a></li><li><a href="#u521bu5efau95e8u7981u8ba1u52120a3ca20id3du521bu5efau95e8u7981u8ba1u52123e203ca3e">创建门禁计划
+<a id=创建门禁计划> </a></a></li><li><a href="#u83b7u53d6u6307u5b9aidu7684u95e8u7981u8ba1u52120a3ca20id3du83b7u53d6u6307u5b9aidu7684u95e8u7981u8ba1u52123e203ca3e">获取指定id的门禁计划
+<a id=获取指定id的门禁计划> </a></a></li><li><a href="#u4feeu6539u6307u5b9aidu7684u95e8u7981u8ba1u52120a3ca20id3du4feeu6539u6307u5b9aidu7684u95e8u7981u8ba1u52123e203ca3e">修改指定id的门禁计划
+<a id=修改指定id的门禁计划> </a></a></li><li><a href="#u5220u9664u6307u5b9aidu7684u95e8u7981u8ba1u52120a3ca20id3du5220u9664u6307u5b9aidu7684u95e8u7981u8ba1u52123e203ca3e">删除指定id的门禁计划
+<a id=删除指定id的门禁计划> </a></a></li></ul></li><li><a href="#u901au884cu8bb0u5f55u67e5u8be2u63a5u53e3">通行记录查询接口</a><ul><li><a href="#u6761u4ef6u67e5u8be2u901au884cu8bb0u5f550a3ca20id3du6761u4ef6u67e5u8be2u901au884cu8bb0u5f553e203ca3e">条件查询通行记录
+<a id=条件查询通行记录> </a></a></li></ul></li><li><a href="#u5b9eu65f6u6570u636eu63a8u9001u63a5u53e3">实时数据推送接口</a><ul><li><a href="#u6d88u606fu8ba2u96050a3ca20id3du6d88u606fu8ba2u96053e203ca3e">消息订阅
+<a id=消息订阅> </a></a></li></ul></li></ul></div>
+          <div id="right" class="content-right">
+           <h1 class="curproject-name"> WebAPI_1.0 </h1> 
+<h3 id="">公共信息</h3>
+<h4>Web API 接口说明</h4>
+<h5>安全机制</h5>
+<ul>
+<li>WEB API接口必须登录后才能使用，登录所用的资源服务接口为auth；</li>
+<li>auth接口使用两步登录认证，成功登陆后会返回一个SessionID；</li>
+<li>每个API请求，需要把SessionID加入到HTTP请求头部的Cookie字段；</li>
+<li>API请求中如果涉及到密码、个人或者是其它敏感信息，必须使用AES加密算法加密原始信息，密钥为当前登录Session的SessionID。</li>
+</ul>
+<h5>错误处理</h5>
+<p>错误处理分两种情况：</p>
+<ol>
+<li>协议错误，是由于协议消息格式错误导致的。当HTTP头部错误，或者接收到非法数据，或者遇到套接字超时，接收方将收到协议错误。为了指示和解释协议错误，HTTP协议定义了一组标准状态代码 [例如1xx，2xx，3xx，4xx，5xx]，详情可以参考常用HTTP状态码；</li>
+<li>资源操作返回的错误，比如增删人脸照片、查询通行记录由于操作设备资源原因产生的错误，通常会返回大于400的HTTP状态码，并且response body返回一个以json格式描述的错误数据，通用格式如下：</li>
+</ol>
+<pre><code>{
+errors：[
+    {
+        "status": 503,
+        "source": { "pointer": “/devices/status” },
+        "title": "Service Unavailable",
+        "detail": "worker is busy",
+        "error_code": 0
+    }
+]
+}
+</code></pre>
+<h5>使用限制</h5>
+<p>WEB API接口只有在设备使用本地模式模式时才能使用，云模式、考拉和盘古服务器模式下必须关闭接口的访问功能。</p>
+<h5>HTTP响应</h5>
+<ol>
+<li>响应的body直接就是数据，不要过度包装；</li>
+<li>各HTTP方法成功处理后的数据格式：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>响应格式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>单个对象、集合</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>新增成功的对象</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>更新成功的对象</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>空</td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li>json格式的约定<br>
+时间格式采用ISO 8601标准，如"2020-01-01T18:25:43[.322]+08:00"，[.322] [ 表示可选项，为毫秒;<br>
+图片采用urldata格式，即base64编码后的数据加上“data:image/jpeg;base64,”的头部。</li>
+<li>复杂查询分页响应的json数据格式规定如下：</li>
+</ol>
+<pre><code>{
+"paging":{"limit":10,"offset":0,"total":729},
+"data":[ {},{},{}...]
+}
+</code></pre>
+<ol start="5">
+<li>links属性表示有相关联资源，rel表示这个API与当前资源的关系，href表示API的路径；</li>
+</ol>
+<h5>异步API</h5>
+<p>基于HTTP的访问接口都是同步的，但是用户在调用某些资源时，有时候资源无法马上响应或者是在进行非常耗时的操作，比如升级、照片入库等，就需要进行异步的处理；<br>
+通过设计HTTP的状态和返回数据，可以达到异步请求的效果，步骤如下：</p>
+<ol>
+<li>用户请求异步的操作，如上传文件到升级接口；</li>
+<li>升级接口接收到升级文件数据，检查无误后，返回<strong>HTTP 202 Accepted</strong>状态码，并在json返回值中给出获取升级状态的接口：</li>
+</ol>
+<pre><code>HTTP/1.1 202 Accepted
+{
+  "href": "/api/devices/firmware/status",
+  "method": "get"
+}
+</code></pre>
+<ol start="3">
+<li>用户收到202 状态码后，解析json的href字段获取升级状态的url，每隔一段时间，比如1秒去查询升级的状态；</li>
+<li>当获取升级状态的json返回值中返回upgrading状态为finished时，升级完成，否则会给出相应的升级错误码。</li>
+</ol>
+<h1 id="u8ba4u8bc1u7ba1u7406u63a5u53e3">认证管理接口</h1>
+<p></p>
+<h2 id="u767bu5f55u9274u6743u6311u62180a3ca20id3du767bu5f55u9274u6743u6311u62183e203ca3e">登录鉴权挑战
+<a id=登录鉴权挑战> </a></h2>
+<p></p>
+<h3 id="-2">基本信息</h3>
+<p><strong>Path：</strong> /api/auth/login/challenge</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<p>返回的sessioID要保存作为后续请求的凭证，challenge和salt字段的值用来进行下一步的登录认证，鉴权挑战的超时时间为30秒；</p>
+<h3 id="-3">请求参数</h3>
+<p><strong>Query</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>username</td>
+<td>是</td>
+<td>admin</td>
+<td>登录用户名</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-4">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> session_id</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">保存作为后续请求的凭证</span></td><td key=5><p key=0><span style="font-weight: '700'">最大长度: </span><span>64</span></p><p key=1><span style="font-weight: '700'">最小长度: </span><span>32</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> challenge</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">32位随机数</span></td><td key=5><p key=0><span style="font-weight: '700'">最大长度: </span><span>32</span></p><p key=1><span style="font-weight: '700'">最小长度: </span><span>16</span></p></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> salt</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">32、64或128位的UUID或者随机数</span></td><td key=5><p key=0><span style="font-weight: '700'">最大长度: </span><span>128</span></p><p key=1><span style="font-weight: '700'">最小长度: </span><span>32</span></p></td></tr>
+               </tbody>
+              </table>
+<h2 id="u8bbeu5907u767bu5f550a3ca20id3du8bbeu5907u767bu5f553e203ca3e">设备登录
+<a id=设备登录> </a></h2>
+<p></p>
+<h3 id="-5">基本信息</h3>
+<p><strong>Path：</strong> /api/auth/login</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<p>请求中的password字段算法: hash(pwd, salt, challenge)，hash采用SHA2-256 算法，pwd为实际密码，salt、challenge为鉴权挑战接口返回的相应值；<br>
+登录重试5次失败将会锁定用户IP地址，时间30分钟；<br>
+登录成功后，如果5分钟内用户没有进行api的操作，则强制注销本次登录。</p>
+<h3 id="-6">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Query</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>否</td>
+<td>type=web</td>
+<td>web 表示网页端，vms表示平台端，other表示其它客户端，不带type默认web登录</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> session_id</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">保存作为后续请求的凭证</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> username</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3>admin</td><td key=4><span style="white-space: pre-wrap">登录用户名，目前只有admin一个用户</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>admin</span></p></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> password</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">加密算法：SHA2-256(password, salt, challenge)</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-7">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> status</span></td><td key=1><span>number</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">校验结果，200成功，401失败</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> session_id</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">保存作为后续请求的凭证</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> lock_info</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">只有失败后才会返回该字段</span></td><td key=5></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> locked</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否已锁定</span></td><td key=5></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> retry_time</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">剩余重试次数</span></td><td key=5></td></tr><tr key=0-2-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> unlockTime </span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">锁定后剩余解锁时间，单位为秒</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h1 id="u8bbeu5907u7ba1u7406u63a5u53e3">设备管理接口</h1>
+<p></p>
+<h2 id="u83b7u53d6u8bbeu5907u72b6u6001u4fe1u606f0a3ca20id3du83b7u53d6u8bbeu5907u72b6u6001u4fe1u606f3e203ca3e">获取设备状态信息
+<a id=获取设备状态信息> </a></h2>
+<p></p>
+<h3 id="-8">基本信息</h3>
+<p><strong>Path：</strong> /api/devices/status</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-9">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID；</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-10">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> model_spec</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备型号</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> serial_no</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备序列号</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> mac_str</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备硬件地址</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> firmware_version</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">固件版本</span></td><td key=5></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> firmware_date</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">固件发布日期</span></td><td key=5></td></tr><tr key=0-5><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> api_version</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">Web api版本</span></td><td key=5></td></tr><tr key=0-6><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> face_version</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备人脸库版本</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u83b7u53d6u8bbeu5907u8d44u6e90u548cu80fdu529b0a3ca20id3du83b7u53d6u8bbeu5907u8d44u6e90u548cu80fdu529b3e203ca3e">获取设备资源和能力
+<a id=获取设备资源和能力> </a></h2>
+<p></p>
+<h3 id="-11">基本信息</h3>
+<p><strong>Path：</strong> /api/devices/resource</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-12">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID；</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-13">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> max_person_number</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备支持的最大人员数</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> max_access_records</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备支持的最大通行记录</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> saved_person_number</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备当前保存的人员信息总数</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> saved_access_records</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备当前通讯记录的总数</span></td><td key=5></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> saved_card_number</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备当前卡号的总数</span></td><td key=5></td></tr><tr key=0-5><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> bluetooth_support</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备是否支持蓝牙</span></td><td key=5></td></tr><tr key=0-6><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> qrcode_support</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备是否支持二维码通行</span></td><td key=5></td></tr><tr key=0-7><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> idcard_support</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备是否支持刷卡通行</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u4e0au4f20u5347u7ea7u6587u4ef60a3ca20id3du4e0au4f20u5347u7ea7u6587u4ef63e203ca3e">上传升级文件
+<a id=上传升级文件> </a></h2>
+<p></p>
+<h3 id="-14">基本信息</h3>
+<p><strong>Path：</strong> /api/devices/firmware</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<p>上传升级文件后，设备自动启动升级进程。</p>
+<h3 id="-15">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/x-www-form-urlencoded</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID；</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-16">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> href</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">获取升级状态的uri</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> method</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">http 方法</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u5347u7ea7u8fdbu5ea6u67e5u8be20a3ca20id3du5347u7ea7u8fdbu5ea6u67e5u8be23e203ca3e">升级进度查询
+<a id=升级进度查询> </a></h2>
+<p></p>
+<h3 id="-17">基本信息</h3>
+<p><strong>Path：</strong> /api/devices/firmware/status</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<p>upgrading 枚举内容:</p>
+<ul>
+<li>ready – 准备升级</li>
+<li>start – 开始升级</li>
+<li>process – 升级中</li>
+<li>finished – 升级完成</li>
+<li>error – 升级错误</li>
+</ul>
+<p>error_message消息内容:</p>
+<ul>
+<li>tipsUpgradeCheckfile – 文件检查错误</li>
+<li>tipsUpgradeCoverfile – 文件替换错误</li>
+<li>tipsUpgradeParam – 参数错误</li>
+<li>tipsUpgradeRwfile – 读写文件失败</li>
+<li>tipsUpgradeOpenfail – 升级模块开启失败</li>
+<li><span lang="EN-US"></span>tipsUpgradeNetupgrade – 网络升级失败</li>
+</ul>
+<h3 id="-18">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID；</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-19">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> upgrading</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">升级状态</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>ready,start,process,finished,error</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> error_message</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">升级错误信息，升级状态为error时有效</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>tipsUpgradeCheckfile,tipsUpgradeCoverfile,tipsUpgradeParam,tipsUpgradeRwfile,tipsUpgradeOpenfail,tipsUpgradeNetupgrade</span></p></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> percent</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">升级进度，百分比</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>100</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr>
+               </tbody>
+              </table>
+<h2 id="u8fdcu7a0bu91cdu542fu8bbeu59070a3ca20id3du8fdcu7a0bu91cdu542fu8bbeu59073e203ca3e">远程重启设备
+<a id=远程重启设备> </a></h2>
+<p></p>
+<h3 id="-20">基本信息</h3>
+<p><strong>Path：</strong> /api/devices/reboot</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-21">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID；</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-22">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> href</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> delay</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u8fdcu7a0bu6062u590du8bbeu5907u51fau5382u503c0a3ca20id3du8fdcu7a0bu6062u590du8bbeu5907u51fau5382u503c3e203ca3e">远程恢复设备出厂值
+<a id=远程恢复设备出厂值> </a></h2>
+<p></p>
+<h3 id="-23">基本信息</h3>
+<p><strong>Path：</strong> /api/devices/restore</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-24">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID；</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-25">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> href</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> delay</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u83b7u53d6u7f51u7edcu53c2u65700a3ca20id3du83b7u53d6u7f51u7edcu53c2u65703e203ca3e">获取网络参数
+<a id=获取网络参数> </a></h2>
+<p></p>
+<h3 id="-26">基本信息</h3>
+<p><strong>Path：</strong> /api/devices/network</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<p>设备不支持无线和端口时，可以不返回wifi和posts字段。</p>
+<h3 id="-27">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID；</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-28">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> lan</span></td><td key=1><span>object</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">有线网络配置</span></td><td key=5></td></tr><tr key=0-0-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> dhcp</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否启用DHCP</span></td><td key=5></td></tr><tr key=0-0-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ip</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备ip地址</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@ip</span></p></td></tr><tr key=0-0-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> mask</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备子网掩码</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@ip</span></p></td></tr><tr key=0-0-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> gateway</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备网关</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@ip</span></p></td></tr><tr key=0-0-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> dns1</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备主DNS</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@ip</span></p></td></tr><tr key=0-0-5><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> dns2</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备从DNS</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@ip</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> wifi</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">无线网络配置</span></td><td key=5></td></tr><tr key=0-1-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> mode</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否启用无线</span></td><td key=5></td></tr><tr key=0-1-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ip</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备无线网络ip地址</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@ip</span></p></td></tr><tr key=0-1-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ssid</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备无线网络SSID</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> ports</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> http_port</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>65535</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> rtsp_port</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>65535</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-2-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> https_port</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>65535</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr>
+               </tbody>
+              </table>
+<h2 id="u8bbeu7f6eu7f51u7edcu53c2u65700a3ca20id3du8bbeu7f6eu7f51u7edcu53c2u65703e203ca3e">设置网络参数
+<a id=设置网络参数> </a></h2>
+<p></p>
+<h3 id="-29">基本信息</h3>
+<p><strong>Path：</strong> /api/devices/network</p>
+<p><strong>Method：</strong> PUT</p>
+<p><strong>接口描述：</strong></p>
+<p>暂时只支持有线网络参数的设置；<br>
+如果设备不支持设置网络参数，PUT时返回HTTP 500错误。</p>
+<h3 id="-30">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID；</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> lan</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备有线网络参数</span></td><td key=5></td></tr><tr key=0-0-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> dhcp</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否启用DHCP</span></td><td key=5></td></tr><tr key=0-0-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> ip</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备ip</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@ip</span></p></td></tr><tr key=0-0-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> mask</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备子网掩码</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@ip</span></p></td></tr><tr key=0-0-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> gateway</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备网关</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@ip</span></p></td></tr><tr key=0-0-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> dns1</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备主DNS</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@ip</span></p></td></tr><tr key=0-0-5><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> dns2</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备从DNS</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@ip</span></p></td></tr>
+               </tbody>
+              </table>
+<h3 id="-31">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody">
+               </tbody>
+              </table>
+<h2 id="u83b7u53d6u8bbeu5907u65f6u95f40a3ca20id3du83b7u53d6u8bbeu5907u65f6u95f43e203ca3e">获取设备时间
+<a id=获取设备时间> </a></h2>
+<p></p>
+<h3 id="-32">基本信息</h3>
+<p><strong>Path：</strong> /api/devices/time</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-33">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID；</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-34">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> local_time</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备当前时间，ISO8601格式</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> ntp</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">ntp客户端配置</span></td><td key=5></td></tr><tr key=0-1-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> mode</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否启用ntp自动校时</span></td><td key=5></td></tr><tr key=0-1-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> time_zone</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备时区</span></td><td key=5></td></tr><tr key=0-1-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> server_port</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3>123</td><td key=4><span style="white-space: pre-wrap">ntp服务器端口</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>65535</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-1-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> sync_interval</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">自动同步的间隔时间，单位分</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>120</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-1-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> server_address</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">ntp服务器地址</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u8bbeu7f6eu8bbeu5907u65f6u95f40a3ca20id3du8bbeu7f6eu8bbeu5907u65f6u95f43e203ca3e">设置设备时间
+<a id=设置设备时间> </a></h2>
+<p></p>
+<h3 id="-35">基本信息</h3>
+<p><strong>Path：</strong> /api/devices/time</p>
+<p><strong>Method：</strong> PUT</p>
+<p><strong>接口描述：</strong></p>
+<p>ISO8601时间格式：2020-08-31T15:47:47+08:00<br>
+timezone格式：GMT+08:00:00</p>
+<h3 id="-36">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID；</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> local_time</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备时间，ISO8601格式</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> ntp</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">ntp客户端配置</span></td><td key=5></td></tr><tr key=0-1-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> mode</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否启用ntp自动校时</span></td><td key=5></td></tr><tr key=0-1-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> time_zone</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备时区</span></td><td key=5></td></tr><tr key=0-1-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> server_port</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3>123</td><td key=4><span style="white-space: pre-wrap">ntp服务器端口</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>65535</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-1-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> sync_interval</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">自动同步的间隔时间，单位分</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>120</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-1-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> server_address</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">ntp服务器地址</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-37">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody">
+               </tbody>
+              </table>
+<h2 id="u83b7u53d6u4ebau8138u548cu8bc6u522bu53c2u65700a3ca20id3du83b7u53d6u4ebau8138u548cu8bc6u522bu53c2u65703e203ca3e">获取人脸和识别参数
+<a id=获取人脸和识别参数> </a></h2>
+<p></p>
+<h3 id="-38">基本信息</h3>
+<p><strong>Path：</strong> /api/devices/recognition</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<p>recognition_mode使用模式为单人模式时，设备门禁参数verification_mode中的<span class="colour" style="color:rgb(23, 43, 77)">“人脸”，“人脸或刷卡”，“人脸和刷卡”有效；</span><br>
+recognition_mode使用模式为多人模式时，设备门禁参数verification_mode中的<span class="colour" style="color:rgb(23, 43, 77)">“人脸”，“人脸或刷卡”有效；</span></p>
+<h3 id="-39">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID；</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-40">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> recognition_mode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">使用模式，single 单人模式，double双人模式</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>single,double</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> recognition_threshold</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">识别阈值</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>100</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> camera_wdr_enable</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">宽动态开关</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> camera_wdr</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">宽动态等级</span></td><td key=5></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> max_recognition_distance</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">最大识别距离，单位米</span></td><td key=5></td></tr><tr key=0-5><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> second_recognition_distance</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">二次识别间隔，单位秒</span></td><td key=5></td></tr><tr key=0-6><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> face</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人脸参数</span></td><td key=5></td></tr><tr key=0-6-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> face_ae</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">FACE AE功能开关</span></td><td key=5></td></tr><tr key=0-6-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> yaw_threshold</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3>30</td><td key=4><span style="white-space: pre-wrap">水平角度</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>90</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-6-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> pitch_threshold</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3>30</td><td key=4><span style="white-space: pre-wrap">垂直角度</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>90</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-6-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> roll_threshold</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">旋转角度</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>90</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-6-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> sharpness_threshold</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">清晰度</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>100</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-7><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> liveness_mode</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">活体检测开关</span></td><td key=5></td></tr><tr key=0-8><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> rgb_liveness_threshold</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">活体检测阈值</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>100</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-9><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> ir_detect</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">IR 检测</span></td><td key=5></td></tr><tr key=0-10><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> mask_mode</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">口罩检测开关</span></td><td key=5></td></tr><tr key=0-11><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> mask_threshold</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">口罩检测阈值</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>100</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr>
+               </tbody>
+              </table>
+<h2 id="u8bbeu7f6eu4ebau8138u548cu8bc6u522bu53c2u65700a3ca20id3du8bbeu7f6eu4ebau8138u548cu8bc6u522bu53c2u65703e203ca3e">设置人脸和识别参数
+<a id=设置人脸和识别参数> </a></h2>
+<p></p>
+<h3 id="-41">基本信息</h3>
+<p><strong>Path：</strong> /api/devices/recognition</p>
+<p><strong>Method：</strong> PUT</p>
+<p><strong>接口描述：</strong></p>
+<p>recognition_mode使用模式为单人模式时，设备门禁参数verification_mode中的<span class="colour" style="color:rgb(23, 43, 77)">“人脸”，“人脸或刷卡”，“人脸和刷卡”有效；</span><br>
+recognition_mode使用模式为多人模式时，设备门禁参数verification_mode中的<span class="colour" style="color:rgb(23, 43, 77)">“人脸”，“人脸或刷卡”有效；</span></p>
+<h3 id="-42">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID；</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> recognition_mode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">使用模式，single 单人模式，double双人模式</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>single,double</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> recognition_threshold</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3>65</td><td key=4><span style="white-space: pre-wrap">识别阈值</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>100</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> camera_wdr_enable</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">宽动态开关</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> camera_wdr</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3>1</td><td key=4><span style="white-space: pre-wrap">宽动态等级</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>3</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> max_recognition_distance</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">最大识别距离，单位米</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>2</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-5><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> second_recognition_distance</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">识别间隔，单位秒</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>10</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-6><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> face</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人脸参数</span></td><td key=5></td></tr><tr key=0-6-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> face_ae</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">FACE AE功能开关</span></td><td key=5></td></tr><tr key=0-6-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> yaw_threshold</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3>30</td><td key=4><span style="white-space: pre-wrap">水平角度</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>90</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-6-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> pitch_threshold</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3>30</td><td key=4><span style="white-space: pre-wrap">垂直角度</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>90</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-6-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> roll_threshold</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3>30</td><td key=4><span style="white-space: pre-wrap">旋转角度</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>90</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-6-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> sharpness_threshold</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3>0</td><td key=4><span style="white-space: pre-wrap">清晰度</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>100</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-7><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> liveness_mode</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">活体检测开关</span></td><td key=5></td></tr><tr key=0-8><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> rgb_liveness_threshold</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">活体检测阈值</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>100</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-9><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> ir_detect</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">IR 检测</span></td><td key=5></td></tr><tr key=0-10><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> mask_mode</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">口罩检测开关</span></td><td key=5></td></tr><tr key=0-11><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> mask_threshold</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3>70</td><td key=4><span style="white-space: pre-wrap">口罩检测阈值</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>100</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr>
+               </tbody>
+              </table>
+<h3 id="-43">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody">
+               </tbody>
+              </table>
+<h2 id="u83b7u53d6u8bbeu5907u95e8u7981u53c2u65700a3ca20id3du83b7u53d6u8bbeu5907u95e8u7981u53c2u65703e203ca3e">获取设备门禁参数
+<a id=获取设备门禁参数> </a></h2>
+<p></p>
+<h3 id="-44">基本信息</h3>
+<p><strong>Path：</strong> /api/devices/door</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-45">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID；</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-46">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> sensor_type</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">门磁类型，open 常开，close常闭，none 不使用</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>open,close,none</span></p><p key=3><span style="font-weight: '700'">枚举备注: </span><span></span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> verification_mode</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">认证方式，face仅人脸，face_or_card人脸或刷卡，face_and_card人脸和刷卡，face_and_pass人脸和密码</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>face,face_or_card,face_and_card,face_and_pass</span></p></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> open_timeout</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">开门超时时长，单位秒</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>60</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> open_duration</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">门锁控制时间，单位毫秒</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>60000</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> open_delay</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">延时门锁控制，单位秒</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>60</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr>
+               </tbody>
+              </table>
+<h2 id="u8bbeu7f6eu8bbeu5907u95e8u7981u53c2u65700a3ca20id3du8bbeu7f6eu8bbeu5907u95e8u7981u53c2u65703e203ca3e">设置设备门禁参数
+<a id=设置设备门禁参数> </a></h2>
+<p></p>
+<h3 id="-47">基本信息</h3>
+<p><strong>Path：</strong> /api/devices/door</p>
+<p><strong>Method：</strong> PUT</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-48">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID；</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> sensor_type</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">门磁类型，open 常开，close常闭，none 不使用</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> verification_mode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">认证方式，face仅人脸，face_or_card人脸或刷卡，face_and_card人脸和刷卡</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>face,face_or_card,face_and_card,face_and_pass</span></p></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> open_timeout</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">开门超时时长，单位秒</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>60</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> open_duration</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">门锁控制时间，单位毫秒</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>60000</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> open_delay</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">延时门锁控制，单位秒</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>60</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr>
+               </tbody>
+              </table>
+<h3 id="-49">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody">
+               </tbody>
+              </table>
+<h2 id="u83b7u53d6u8bbeu5907u4e2au6027u53c2u65700a3ca20id3du83b7u53d6u8bbeu5907u4e2au6027u53c2u65703e203ca3e">获取设备个性参数
+<a id=获取设备个性参数> </a></h2>
+<p></p>
+<h3 id="-50">基本信息</h3>
+<p><strong>Path：</strong> /api/devices/profile</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-51">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-52">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> company_name</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">公司名称</span></td><td key=5><p key=0><span style="font-weight: '700'">最大长度: </span><span>120</span></p><p key=1><span style="font-weight: '700'">最小长度: </span><span>1</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> location</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备地点</span></td><td key=5><p key=0><span style="font-weight: '700'">最大长度: </span><span>120</span></p><p key=1><span style="font-weight: '700'">最小长度: </span><span>1</span></p></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> show_person_name</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否显示人员名称</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> picture_type</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">显示照片的类型，library 显示底库类型，snapshot 显示抓拍照片，none不显示照片</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>snapshot,library,none</span></p></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> voice_volume</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">音量调节</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>100</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-5><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> stanby_time</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">进入待机时间，单位分钟</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>30</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-6><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> lcd_backlight</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">屏幕亮度</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>100</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr>
+               </tbody>
+              </table>
+<h2 id="u8bbeu7f6eu8bbeu5907u4e2au6027u53c2u65700a3ca20id3du8bbeu7f6eu8bbeu5907u4e2au6027u53c2u65703e203ca3e">设置设备个性参数
+<a id=设置设备个性参数> </a></h2>
+<p></p>
+<h3 id="-53">基本信息</h3>
+<p><strong>Path：</strong> /api/devices/profile</p>
+<p><strong>Method：</strong> PUT</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-54">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> company_name</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">公司名称</span></td><td key=5><p key=0><span style="font-weight: '700'">最大长度: </span><span>120</span></p><p key=1><span style="font-weight: '700'">最小长度: </span><span>1</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> location</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">设备地点</span></td><td key=5><p key=0><span style="font-weight: '700'">最大长度: </span><span>120</span></p><p key=1><span style="font-weight: '700'">最小长度: </span><span>1</span></p></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> show_person_name</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否显示人员名称</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> picture_type</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">显示照片的类型，library 显示底库类型，snapshot 显示抓拍照片，none不显示照片</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>snapshot,library,none</span></p></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> voice_volume</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">音量调节</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>100</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-5><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> stanby_time</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">进入待机时间，单位分钟</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>30</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-6><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> lcd_backlight</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">屏幕亮度</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>100</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr>
+               </tbody>
+              </table>
+<h3 id="-55">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody">
+               </tbody>
+              </table>
+<h2 id="u83b7u53d6u62a5u8b66u53c2u65700a3ca20id3du83b7u53d6u62a5u8b66u53c2u65703e203ca3e">获取报警参数
+<a id=获取报警参数> </a></h2>
+<p></p>
+<h3 id="-56">基本信息</h3>
+<p><strong>Path：</strong> /api/devices/alarm</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-57">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-58">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> input_1</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">报警输入1触发配置，alert 报警信号，fire 消防信号，none 不启用</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>alert,fire,none</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> input_2</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">报警输入2触发配置</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>alert,fire,none</span></p></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> output</span></td><td key=1><span>string []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">报警输出类型，可以同时设置多个功能</span></td><td key=5><p key=0><span style="font-weight: '700'">最小数量: </span><span>1</span></p><p key=1><span style="font-weight: '700'">元素是否都不同: </span><span>true</span></p><p key=2><span style="font-weight: '700'">最大数量: </span><span>5</span></p><p key=3><span style="font-weight: '700'">item 类型: </span><span>string</span></p></td></tr><tr key=array-3159><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> </span></td><td key=1><span></span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">input_2 – 报警输入2，input_1 – 报警输出1，doorcontact_timeout – 门磁超时，blacklist – 黑名单，bell – 门铃</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u8bbeu7f6eu62a5u8b66u53c2u65700a3ca20id3du8bbeu7f6eu62a5u8b66u53c2u65703e203ca3e">设置报警参数
+<a id=设置报警参数> </a></h2>
+<p></p>
+<h3 id="-59">基本信息</h3>
+<p><strong>Path：</strong> /api/devices/alarm</p>
+<p><strong>Method：</strong> PUT</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-60">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> input_1</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">报警输入1触发配置</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>alert,fire,none</span></p><p key=3><span style="font-weight: '700'">枚举备注: </span><span>alert – 报警信号
+fire – 消防信号
+none – 不启用</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> input_2</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">报警输入2触发配置</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>alert,fire,none</span></p><p key=3><span style="font-weight: '700'">枚举备注: </span><span>alert – 报警信号
+fire – 消防信号
+none – 不启用</span></p></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> output</span></td><td key=1><span>string []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">报警输出类型，可以同时设置多个功能</span></td><td key=5><p key=0><span style="font-weight: '700'">最小数量: </span><span>1</span></p><p key=1><span style="font-weight: '700'">元素是否都不同: </span><span>true</span></p><p key=2><span style="font-weight: '700'">最大数量: </span><span>5</span></p><p key=3><span style="font-weight: '700'">item 类型: </span><span>string</span></p></td></tr><tr key=array-3160><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> </span></td><td key=1><span></span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">input_2 – 报警输入2，input_1 – 报警输出1，doorcontact_timeout – 门磁超时，blacklist – 黑名单，bell – 门铃</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-61">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody">
+               </tbody>
+              </table>
+<h2 id="u89e6u53d1u8bbeu5907iou64cdu4f5c0a3ca20id3du89e6u53d1u8bbeu5907iou64cdu4f5c3e203ca3e">触发设备IO操作
+<a id=触发设备IO操作> </a></h2>
+<p></p>
+<h3 id="-62">基本信息</h3>
+<p><strong>Path：</strong> /api/devices/io</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-63">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/x-www-form-urlencoded</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="u83b7u53d6u5468u8fb9u901au8bafu63a5u53e3u53c2u65700a3ca20id3du83b7u53d6u5468u8fb9u901au8bafu63a5u53e3u53c2u65703e203ca3e">获取周边通讯接口参数
+<a id=获取周边通讯接口参数> </a></h2>
+<p></p>
+<h3 id="-64">基本信息</h3>
+<p><strong>Path：</strong> /api/devices/communications</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-65">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-66">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> wiegand</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">韦根通讯接口参数</span></td><td key=5></td></tr><tr key=0-0-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> enabled</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否启用</span></td><td key=5></td></tr><tr key=0-0-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> mode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">韦根使用模式，input 输入模式，output输出模式</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>input,output</span></p></td></tr><tr key=0-0-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> type</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">韦根格式，支持wiegand26 和 wiegand34</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>wiegand26,wiegand34</span></p></td></tr><tr key=0-0-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> output_info</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">韦根输出模式时发送的内容</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>output_person_no,output_card_no</span></p><p key=3><span style="font-weight: '700'">枚举备注: </span><span>发送人员编码
+发送人员卡号</span></p></td></tr>
+               </tbody>
+              </table>
+<h2 id="u8bbeu7f6eu5468u8fb9u901au8bafu63a5u53e3u53c2u65700a3ca20id3du8bbeu7f6eu5468u8fb9u901au8bafu63a5u53e3u53c2u65703e203ca3e">设置周边通讯接口参数
+<a id=设置周边通讯接口参数> </a></h2>
+<p></p>
+<h3 id="-67">基本信息</h3>
+<p><strong>Path：</strong> /api/devices/communications</p>
+<p><strong>Method：</strong> PUT</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-68">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> wiegand</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">韦根通讯接口参数</span></td><td key=5></td></tr><tr key=0-0-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> enabled</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否启用韦根</span></td><td key=5></td></tr><tr key=0-0-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> mode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">韦根使用模式，input 输入模式，output输出模式</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>input,output</span></p></td></tr><tr key=0-0-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> type</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">韦根格式，支持wiegand26 和wiegand34</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>wiegand26,wiegand34</span></p></td></tr><tr key=0-0-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> output_info</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">韦根输出模式时发送的内容</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>output_person_no,output_card_no</span></p><p key=3><span style="font-weight: '700'">枚举备注: </span><span>发送人员编码,
+发送人员卡号</span></p></td></tr>
+               </tbody>
+              </table>
+<h3 id="-69">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody">
+               </tbody>
+              </table>
+<h1 id="u4ebau5458u7ba1u7406u63a5u53e3">人员管理接口</h1>
+<p></p>
+<h2 id="u6761u4ef6u67e5u8be2u4ebau5458u4fe1u606f0a3ca20id3du6761u4ef6u67e5u8be2u4ebau5458u4fe1u606f3e203ca3e">条件查询人员信息
+<a id=条件查询人员信息> </a></h2>
+<p></p>
+<h3 id="-70">基本信息</h3>
+<p><strong>Path：</strong> /api/persons/query</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-71">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> query_id</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">客户端请求的uuid</span></td><td key=5><p key=0><span style="font-weight: '700'">最大长度: </span><span>64</span></p><p key=1><span style="font-weight: '700'">最小长度: </span><span>32</span></p><p key=5><span style="font-weight: '700'">mock: </span><span>@guid</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> limit</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">本次查询的最大数量</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>100</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> offset</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">本次查询的偏移量</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>50000</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> sort</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">排序方式，asc正序，desc倒序</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>asc,desc</span></p><p key=5><span style="font-weight: '700'">mock: </span><span>asc</span></p></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> query_string</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">模糊查询人员名称或者编号的字符串</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-72">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> query_id</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@guid</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> paging</span></td><td key=1><span>object</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">分页标记</span></td><td key=5></td></tr><tr key=0-1-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> limit</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">本次查询的最大数量</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>50000</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-1-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> offset</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">本次查询的偏移量</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>50000</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-1-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> total</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">当前条件下查询到的总条数</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>50000</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> data</span></td><td key=1><span>object []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员数据列表</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> recognition_type</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员类型，staff – 普通人员，visitor – 访客，blacklist – 黑名单	</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>staff,visitor,blacklist</span></p></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> id</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员id</span></td><td key=5></td></tr><tr key=0-2-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> type</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">固定为persons</span></td><td key=5></td></tr><tr key=0-2-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> is_admin</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否启用管理员权限</span></td><td key=5></td></tr><tr key=0-2-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> enabled</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员是否启用</span></td><td key=5></td></tr><tr key=0-2-5><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> person_name</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员名称</span></td><td key=5></td></tr><tr key=0-2-6><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> password</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">密码，AES编码(openssl格式)</span></td><td key=5></td></tr><tr key=0-2-7><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> card_number</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">卡号</span></td><td key=5></td></tr><tr key=0-2-8><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> group_list</span></td><td key=1><span>integer []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">绑定人员组的列表</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>integer</span></p></td></tr><tr key=array-3161><td key=0><span style="padding-left: 40px"><span style="color: #8c8a8a">├─</span> </span></td><td key=1><span></span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员组id</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u521bu5efau4ebau5458u4fe1u606f0a3ca20id3du521bu5efau4ebau5458u4fe1u606f3e203ca3e">创建人员信息
+<a id=创建人员信息> </a></h2>
+<p></p>
+<h3 id="-73">基本信息</h3>
+<p><strong>Path：</strong> /api/persons/item</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<p>人员添加失败的错误码和错误信息如下：</p>
+<table>
+<thead>
+<tr>
+<th>错误码</th>
+<th>错误信息</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Picture format error.</td>
+<td>图片格式错误</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Wrong size.</td>
+<td>图片大小超出限制</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Resolution no support.</td>
+<td>图片分辨率超出限制</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Face no feature.</td>
+<td>人脸无特征值</td>
+</tr>
+<tr>
+<td>17</td>
+<td>No picture.</td>
+<td>入库无图片</td>
+</tr>
+<tr>
+<td>18</td>
+<td>No face.</td>
+<td>未检测到人脸</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Multiple face detected.</td>
+<td>检测到多个人脸</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Face too small.</td>
+<td>人脸太小</td>
+</tr>
+<tr>
+<td>21</td>
+<td>Picture is too bright.</td>
+<td>图片太亮</td>
+</tr>
+<tr>
+<td>22</td>
+<td>Picture is too dark.</td>
+<td>图片太暗</td>
+</tr>
+<tr>
+<td>23</td>
+<td>Face is too blur.</td>
+<td>人脸太模糊</td>
+</tr>
+<tr>
+<td>24</td>
+<td>Wrong face pose.</td>
+<td>人脸方向错误</td>
+</tr>
+<tr>
+<td>32</td>
+<td>Database is full.</td>
+<td>数据库满</td>
+</tr>
+<tr>
+<td>33</td>
+<td>Duplicate face image.</td>
+<td>人脸图片重复</td>
+</tr>
+<tr>
+<td>34</td>
+<td>Duplicate face number.</td>
+<td>人员编号重复</td>
+</tr>
+<tr>
+<td>35</td>
+<td>Duplicate card number.</td>
+<td>卡号重复</td>
+</tr>
+<tr>
+<td>48</td>
+<td>Duplicate face name.</td>
+<td>人员名称重复</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>Unknow Error.</td>
+<td>未知错误</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-74">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> recognition_type</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员类型，staff – 普通人员，visitor – 访客，blacklist – 黑名单</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>staff,visitor,blacklist</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> id</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员id，为空时使用数据编号</span></td><td key=5><p key=0><span style="font-weight: '700'">最大长度: </span><span>40</span></p><p key=1><span style="font-weight: '700'">最小长度: </span><span>1</span></p></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> is_admin</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否启用管理员权限</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> person_name</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员名称</span></td><td key=5><p key=0><span style="font-weight: '700'">最大长度: </span><span>40</span></p><p key=1><span style="font-weight: '700'">最小长度: </span><span>1</span></p><p key=5><span style="font-weight: '700'">mock: </span><span>@name</span></p></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> password</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3>6</td><td key=4><span style="white-space: pre-wrap">密码使用6位数字</span></td><td key=5><p key=0><span style="font-weight: '700'">最大长度: </span><span>6</span></p><p key=1><span style="font-weight: '700'">最小长度: </span><span>6</span></p></td></tr><tr key=0-5><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> card_number</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">卡号，最大20位数字</span></td><td key=5><p key=0><span style="font-weight: '700'">最大长度: </span><span>20</span></p><p key=1><span style="font-weight: '700'">最小长度: </span><span>1</span></p><p key=5><span style="font-weight: '700'">mock: </span><span>@id</span></p></td></tr><tr key=0-6><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> group_list</span></td><td key=1><span>integer []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">绑定人员组的列表</span></td><td key=5><p key=0><span style="font-weight: '700'">最小数量: </span><span>1</span></p><p key=1><span style="font-weight: '700'">元素是否都不同: </span><span>true</span></p><p key=2><span style="font-weight: '700'">最大数量: </span><span>128</span></p><p key=3><span style="font-weight: '700'">item 类型: </span><span>integer</span></p></td></tr><tr key=array-3162><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> </span></td><td key=1><span></span></td><td key=2>非必须</td><td key=3>1</td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-7><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> face_list</span></td><td key=1><span>object []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员照片</span></td><td key=5><p key=0><span style="font-weight: '700'">最小数量: </span><span>1</span></p><p key=2><span style="font-weight: '700'">最大数量: </span><span>1</span></p><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-7-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> idx</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">照片索引</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>0</span></p></td></tr><tr key=0-7-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> data</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">Data URI: Base64编码的照片数据</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@imageData</span></p></td></tr>
+               </tbody>
+              </table>
+<h3 id="-75">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody">
+               </tbody>
+              </table>
+<h2 id="u83b7u53d6u6307u5b9aidu7684u4ebau5458u4fe1u606f0a3ca20id3du83b7u53d6u6307u5b9aidu7684u4ebau5458u4fe1u606f3e203ca3e">获取指定id的人员信息
+<a id=获取指定id的人员信息> </a></h2>
+<p></p>
+<h3 id="-76">基本信息</h3>
+<p><strong>Path：</strong> /api/persons/item/{id}</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-77">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>路径参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>1</td>
+<td>获取id为1的人员参数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-78">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> recognition_type</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员类型，staff – 普通人员，visitor – 访客，blacklist – 黑名单</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>staff,visitor,blacklist</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> id</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员id</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> type</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">固定为persons</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>persons</span></p></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> is_admin</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否启用管理员权限</span></td><td key=5></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> person_name</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员名称</span></td><td key=5></td></tr><tr key=0-5><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> password</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">密码使用6位数字</span></td><td key=5></td></tr><tr key=0-6><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> card_number</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">卡号</span></td><td key=5></td></tr><tr key=0-7><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> group_list</span></td><td key=1><span>integer []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">绑定人员组的列表</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>integer</span></p></td></tr><tr key=array-3163><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> </span></td><td key=1><span></span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员组id</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u8bbeu7f6eu6307u5b9aidu7684u4ebau5458u4fe1u606f0a3ca20id3du8bbeu7f6eu6307u5b9aidu7684u4ebau5458u4fe1u606f3e203ca3e">设置指定id的人员信息
+<a id=设置指定id的人员信息> </a></h2>
+<p></p>
+<h3 id="-79">基本信息</h3>
+<p><strong>Path：</strong> /api/persons/item/{id}</p>
+<p><strong>Method：</strong> PUT</p>
+<p><strong>接口描述：</strong></p>
+<p>设置人员信息出错时，请参考创建人员信息返回的错误值表。</p>
+<h3 id="-80">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>路径参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>1</td>
+<td>设置id为1的人员人员信息</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> recognition_type</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员类型，staff – 普通人员，visitor – 访客，blacklist – 黑名单</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>staff,visitor,blacklist</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> id</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员id，为空时使用数据编号</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> is_admin</span></td><td key=1><span>boolean</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否启用管理员权限</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> person_name</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员名称</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@name</span></p></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> password</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3>6</td><td key=4><span style="white-space: pre-wrap">密码使用6位数字</span></td><td key=5><p key=0><span style="font-weight: '700'">最大长度: </span><span>6</span></p><p key=1><span style="font-weight: '700'">最小长度: </span><span>6</span></p></td></tr><tr key=0-5><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> card_number</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">卡号</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@id</span></p></td></tr><tr key=0-6><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> group_list</span></td><td key=1><span>integer []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">绑定人员组的列表</span></td><td key=5><p key=0><span style="font-weight: '700'">最小数量: </span><span>1</span></p><p key=1><span style="font-weight: '700'">元素是否都不同: </span><span>true</span></p><p key=2><span style="font-weight: '700'">最大数量: </span><span>128</span></p><p key=3><span style="font-weight: '700'">item 类型: </span><span>integer</span></p></td></tr><tr key=array-3164><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> </span></td><td key=1><span></span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-7><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> face_list</span></td><td key=1><span>object []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员照片</span></td><td key=5><p key=0><span style="font-weight: '700'">最小数量: </span><span>1</span></p><p key=1><span style="font-weight: '700'">元素是否都不同: </span><span>true</span></p><p key=2><span style="font-weight: '700'">最大数量: </span><span>1</span></p><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-7-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> idx</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3>0</td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>0</span></p></td></tr><tr key=0-7-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> data</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">Data URI: Base64编码的照片数据</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@imageData</span></p></td></tr>
+               </tbody>
+              </table>
+<h3 id="-81">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody">
+               </tbody>
+              </table>
+<h2 id="u5220u9664u6307u5b9aidu7684u4ebau5458u4fe1u606f0a3ca20id3du5220u9664u6307u5b9aidu7684u4ebau5458u4fe1u606f3e203ca3e">删除指定id的人员信息
+<a id=删除指定id的人员信息> </a></h2>
+<p></p>
+<h3 id="-82">基本信息</h3>
+<p><strong>Path：</strong> /api/persons/item/{id}</p>
+<p><strong>Method：</strong> DELETE</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-83">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>路径参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>1</td>
+<td>删除id为1的人员</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody">
+               </tbody>
+              </table>
+<h1 id="u4ebau5458u7ec4u7ba1u7406u63a5u53e3">人员组管理接口</h1>
+<p></p>
+<h2 id="u6761u4ef6u67e5u8be2u4ebau5458u7ec4u4fe1u606f0a3ca20id3du6761u4ef6u67e5u8be2u4ebau5458u7ec4u4fe1u606f3e203ca3e">条件查询人员组信息
+<a id=条件查询人员组信息> </a></h2>
+<p></p>
+<h3 id="-84">基本信息</h3>
+<p><strong>Path：</strong> /api/groups/query</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<p>人员组查询，可以通过人员组名称模糊匹配；<br>
+本接口分页功能无效。</p>
+<h3 id="-85">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> query_id</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">客户端请求的uuid</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@guid</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> limit</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">本次查询的最大数量</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>128</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> offset</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">本次查询的偏移量</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>128</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> sort</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">排序方式，asc正序，desc倒序</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>asc,desc</span></p></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> query_string</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">模糊查询人员组的字符串</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-86">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> request_id</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">客户端请求的uuid</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@guid</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> paging</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">分页标记</span></td><td key=5></td></tr><tr key=0-1-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> limit</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">本次查询的最大数量</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>128</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-1-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> offset</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">本次查询的偏移量</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>128</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-1-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> total</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">当前条件下查询到的总条数	</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>128</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> data</span></td><td key=1><span>object []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员组数据列表</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> id</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员组id</span></td><td key=5></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> type</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">固定为groups</span></td><td key=5></td></tr><tr key=0-2-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> group_name</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员组的名称</span></td><td key=5></td></tr><tr key=0-2-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> person_count</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员组拥有人员的总数</span></td><td key=5></td></tr><tr key=0-2-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> create_timestamp</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">创建人员组时的时间戳</span></td><td key=5></td></tr><tr key=0-2-5><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> schedule_id</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员组绑定的门禁计划id</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u521bu5efau4ebau5458u7ec40a3ca20id3du521bu5efau4ebau5458u7ec43e203ca3e">创建人员组
+<a id=创建人员组> </a></h2>
+<p></p>
+<h3 id="-87">基本信息</h3>
+<p><strong>Path：</strong> /api/groups/item</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-88">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> request_id</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">客户端请求的id</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@guid</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> group_name</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员组的名称</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> schedule_id</span></td><td key=1><span>integer</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员组绑定的门禁计划id</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>128</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr>
+               </tbody>
+              </table>
+<h3 id="-89">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> request_id</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">客户端请求的uuid</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@guid</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> id</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员组id</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> type</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">固定为groups</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> group_name</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员组的名称</span></td><td key=5></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> schedule_id</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员组绑定的门禁计划id</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u83b7u53d6u6307u5b9aidu7684u4ebau5458u7ec4u4fe1u606f0a3ca20id3du83b7u53d6u6307u5b9aidu7684u4ebau5458u7ec4u4fe1u606f3e203ca3e">获取指定id的人员组信息
+<a id=获取指定id的人员组信息> </a></h2>
+<p></p>
+<h3 id="-90">基本信息</h3>
+<p><strong>Path：</strong> /api/groups/item/{id}</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-91">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>路径参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>1</td>
+<td>获取id为1的人员组参数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-92">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> id</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">当前人员组id</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> type</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">固定为groups</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> group_name</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员组的名称</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> person_count</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员组拥有人员的总数</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>50000</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> create_timestamp</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">创建人员组时的时间戳</span></td><td key=5></td></tr><tr key=0-5><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> schedule_id</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员组绑定的门禁计划id</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>128</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr>
+               </tbody>
+              </table>
+<h2 id="u8bbeu7f6eu6307u5b9aidu7684u4ebau5458u7ec4u4fe1u606f0a3ca20id3du8bbeu7f6eu6307u5b9aidu7684u4ebau5458u7ec4u4fe1u606f3e203ca3e">设置指定id的人员组信息
+<a id=设置指定id的人员组信息> </a></h2>
+<p></p>
+<h3 id="-93">基本信息</h3>
+<p><strong>Path：</strong> /api/groups/item/{id}</p>
+<p><strong>Method：</strong> PUT</p>
+<p><strong>接口描述：</strong></p>
+<p>注意，ID为1的是默认人员组，参数不可修改！</p>
+<h3 id="-94">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>路径参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>1</td>
+<td>设置id为1的人员组信息</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> request_id</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">客户端请求的uuid</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@guid</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> group_name</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员组的名称</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> schedule_id</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员组绑定的门禁计划id</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>128</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>1</span></p></td></tr>
+               </tbody>
+              </table>
+<h3 id="-95">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody">
+               </tbody>
+              </table>
+<h2 id="u5220u9664u6307u5b9aidu7684u4ebau5458u7ec40a3ca20id3du5220u9664u6307u5b9aidu7684u4ebau5458u7ec43e203ca3e">删除指定id的人员组
+<a id=删除指定id的人员组> </a></h2>
+<p></p>
+<h3 id="-96">基本信息</h3>
+<p><strong>Path：</strong> /api/groups/item/{id}</p>
+<p><strong>Method：</strong> DELETE</p>
+<p><strong>接口描述：</strong></p>
+<p>注意，ID为1的是默认人员组不可删除！</p>
+<h3 id="-97">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>路径参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>1</td>
+<td>删除id为1的人员</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody">
+               </tbody>
+              </table>
+<h1 id="u95e8u7981u8ba1u5212u7ba1u7406u63a5u53e3">门禁计划管理接口</h1>
+<p></p>
+<h2 id="u67e5u8be2u95e8u7981u8ba1u5212u4fe1u606f0a3ca20id3du67e5u8be2u95e8u7981u8ba1u5212u4fe1u606f3e203ca3e">查询门禁计划信息
+<a id=查询门禁计划信息> </a></h2>
+<p></p>
+<h3 id="-98">基本信息</h3>
+<p><strong>Path：</strong> /api/schedules/query</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<p>本接口分页功能无效。</p>
+<h3 id="-99">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> query_id</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">客户端请求的uuid</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@guid</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> limit</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">本次查询的最大数量</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>128</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> offset</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">本次查询的偏移量</span></td><td key=5><p key=0><span style="font-weight: '700'">最大值: </span><span>128</span></p><p key=1><span style="font-weight: '700'">最小值: </span><span>0</span></p></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> sort</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">排序方式，asc正序，desc倒序</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>asc,desc</span></p></td></tr>
+               </tbody>
+              </table>
+<h3 id="-100">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> request_id</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">客户端请求的uuid</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@guid</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> paging</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-1-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> limit</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">本次查询返回的数量</span></td><td key=5></td></tr><tr key=0-1-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> offset</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">本次查询的偏移量</span></td><td key=5></td></tr><tr key=0-1-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> total</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">符合条件查询的总数</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> data</span></td><td key=1><span>object []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> id</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">门禁计划id</span></td><td key=5></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> schedule_name</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">门禁计划的名称</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u521bu5efau95e8u7981u8ba1u52120a3ca20id3du521bu5efau95e8u7981u8ba1u52123e203ca3e">创建门禁计划
+<a id=创建门禁计划> </a></h2>
+<p></p>
+<h3 id="-101">基本信息</h3>
+<p><strong>Path：</strong> /api/schedules/item</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<p>门禁通行规则语法说明，时间参考crontab格式，但是时分不做循环安排（否则像9:20~11:20，这么简单的时间区间要设置3条规则），仅对日、月、周、年支持循环。<br>
+一条规则组成：</p>
+<table>
+<thead>
+<tr>
+<th>time</th>
+<th>分隔符</th>
+<th>date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>见以下说明</td>
+<td>空格</td>
+<td>见以下说明</td>
+</tr>
+</tbody>
+</table>
+<p><strong>time格式说明</strong>：<br>
+采用24进制表达；</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>符号说明</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>:</td>
+<td>冒号</td>
+<td>分割，前为小时，后为分，没有秒</td>
+</tr>
+<tr>
+<td>-</td>
+<td>减号</td>
+<td>表示区间</td>
+</tr>
+<tr>
+<td>,</td>
+<td>逗号</td>
+<td>表示并列关系</td>
+</tr>
+</tbody>
+</table>
+<p>示例如下：</p>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>9:00-10:00</td>
+<td>9点到10点</td>
+</tr>
+<tr>
+<td>9:20-23:00</td>
+<td>9点20到23点<span lang="EN-US"></span> \</td>
+</tr>
+<tr>
+<td>0:00-2:00,9:30-18:00,23:00-23:59</td>
+<td>特殊地，如果时间跨越凌晨，应该分为多个时间段， 早班9点半到18点，晚班23点到凌晨2点</td>
+</tr>
+</tbody>
+</table>
+<p><strong>date格式说明（参考crontab）：</strong><br>
+总共四列，每列按空格分割，分别表示日（按月）、月、日（按周）、年；</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>符号说明</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>星号</td>
+<td>取值范围内的所有数字</td>
+</tr>
+<tr>
+<td>/</td>
+<td>斜杠</td>
+<td>每过多少数字</td>
+</tr>
+<tr>
+<td>-</td>
+<td>减号</td>
+<td>区间</td>
+</tr>
+<tr>
+<td>,</td>
+<td>逗号</td>
+<td>并列关系</td>
+</tr>
+</tbody>
+</table>
+<p>示例如下：</p>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>* * 1-5 *</td>
+<td>每个工作日(Mon – Fri)</td>
+</tr>
+<tr>
+<td>1 * * *</td>
+<td>每月1日</td>
+</tr>
+<tr>
+<td>*/2 * * *</td>
+<td>隔天</td>
+</tr>
+<tr>
+<td>1,15 9 * *</td>
+<td>9月1号以及9月15号</td>
+</tr>
+<tr>
+<td>15 10 * 2018</td>
+<td>2018年10月15日</td>
+</tr>
+<tr>
+<td>2-20 9 * 2018</td>
+<td>2018年9月2日至2018年9月20日</td>
+</tr>
+<tr>
+<td>*/14 * * *</td>
+<td>隔周（大小周）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-102">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> request_id</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">客户端请求的uuid</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@guid</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> schedule_name</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">门禁计划的名称</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> schedule_list</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">门禁计划时间列表</span></td><td key=5><p key=0><span style="font-weight: '700'">最小数量: </span><span>1</span></p><p key=2><span style="font-weight: '700'">最大数量: </span><span>32</span></p><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> type</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">计划类型，workday 工作日，holiday 假日</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>workday,holiday</span></p></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> rule</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">计划规则，工作日只支持按周设置，假日只支持按日期设置</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-103">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> id</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">门禁计划id</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> type</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">固定为schedules</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> schedule_name</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员组的名称</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> schedule_list</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">门禁计划列表</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-3-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> type</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">计划类型，workday 工作日，holiday 假日</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>workday,holiday</span></p></td></tr><tr key=0-3-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> rule</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">计划规则</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u83b7u53d6u6307u5b9aidu7684u95e8u7981u8ba1u52120a3ca20id3du83b7u53d6u6307u5b9aidu7684u95e8u7981u8ba1u52123e203ca3e">获取指定id的门禁计划
+<a id=获取指定id的门禁计划> </a></h2>
+<p></p>
+<h3 id="-104">基本信息</h3>
+<p><strong>Path：</strong> /api/schedules/item/{id}</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-105">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>路径参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>1</td>
+<td>获取id为1的门禁计划</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-106">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> id</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">门禁计划id</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> type</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">固定为schedules</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> schedule_name</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">门禁计划的名称</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> schedule_list</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">门禁计划列表</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-3-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> type</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">计划类型，workday 工作日，holiday 假日</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>workday,holiday</span></p></td></tr><tr key=0-3-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> rule</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">门禁计划，参见创建门禁计划的备注</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h2 id="u4feeu6539u6307u5b9aidu7684u95e8u7981u8ba1u52120a3ca20id3du4feeu6539u6307u5b9aidu7684u95e8u7981u8ba1u52123e203ca3e">修改指定id的门禁计划
+<a id=修改指定id的门禁计划> </a></h2>
+<p></p>
+<h3 id="-107">基本信息</h3>
+<p><strong>Path：</strong> /api/schedules/item/{id}</p>
+<p><strong>Method：</strong> PUT</p>
+<p><strong>接口描述：</strong></p>
+<p>注意，ID为1的是默认门禁计划，参数不可修改！</p>
+<h3 id="-108">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>路径参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>1</td>
+<td>修改id为1的门禁计划</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> request_id</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">客户端请求的uuid</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@guid</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> schedule_name</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员组的名称</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> schedule_list</span></td><td key=1><span>object []</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">门禁计划列表</span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> type</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">计划类型，workday 工作日，holiday 假日</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>workday,holiday</span></p></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> rule</span></td><td key=1><span>string</span></td><td key=2>必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">门禁规则，参考创建门禁计划备注，计划规则，工作日只支持按周设置，假日只支持按日期设置</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-109">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody">
+               </tbody>
+              </table>
+<h2 id="u5220u9664u6307u5b9aidu7684u95e8u7981u8ba1u52120a3ca20id3du5220u9664u6307u5b9aidu7684u95e8u7981u8ba1u52123e203ca3e">删除指定id的门禁计划
+<a id=删除指定id的门禁计划> </a></h2>
+<p></p>
+<h3 id="-110">基本信息</h3>
+<p><strong>Path：</strong> /api/schedules/item/{id}</p>
+<p><strong>Method：</strong> DELETE</p>
+<p><strong>接口描述：</strong></p>
+<p>注意，ID为1的默认门禁计划不可删除！</p>
+<h3 id="-111">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>路径参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>1</td>
+<td>删除id为1的门禁计划</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody">
+               </tbody>
+              </table>
+<h1 id="u901au884cu8bb0u5f55u67e5u8be2u63a5u53e3">通行记录查询接口</h1>
+<p></p>
+<h2 id="u6761u4ef6u67e5u8be2u901au884cu8bb0u5f550a3ca20id3du6761u4ef6u67e5u8be2u901au884cu8bb0u5f553e203ca3e">条件查询通行记录
+<a id=条件查询通行记录> </a></h2>
+<p></p>
+<h3 id="-112">基本信息</h3>
+<p><strong>Path：</strong> /api/passes/query</p>
+<p><strong>Method：</strong> POST</p>
+<p><strong>接口描述：</strong></p>
+<h3 id="-113">请求参数</h3>
+<p><strong>Headers</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>是</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>sessionID=xxxxxx</td>
+<td>是</td>
+<td></td>
+<td>xxxxxx为登录认证后返回的sessioID;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Body</strong></p>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> query_id</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">客户端请求的uuid</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@guid</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> limit</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">本次查询的数量</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> offset</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">本次查询的偏移量</span></td><td key=5></td></tr><tr key=0-3><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> sort</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">排序方式，asc正序，desc倒序</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>asc,desc</span></p></td></tr><tr key=0-4><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> begin_time</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">开始时间，ISO8601格式</span></td><td key=5></td></tr><tr key=0-5><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> end_time</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">结束时间，ISO8601格式</span></td><td key=5></td></tr><tr key=0-6><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> query_string</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员姓名等信息模糊查询字符串</span></td><td key=5></td></tr><tr key=0-7><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> query_person_idx</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员id</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h3 id="-114">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> query_id</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">客户端请求的uuid</span></td><td key=5><p key=5><span style="font-weight: '700'">mock: </span><span>@guid</span></p></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> paging</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5></td></tr><tr key=0-1-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> limit</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">本次查询的数量</span></td><td key=5></td></tr><tr key=0-1-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> offset</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">本次查询的偏移量</span></td><td key=5></td></tr><tr key=0-1-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> total</span></td><td key=1><span>integer</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">当前条件下查询到的总条数</span></td><td key=5></td></tr><tr key=0-2><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> data</span></td><td key=1><span>object []</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap"></span></td><td key=5><p key=3><span style="font-weight: '700'">item 类型: </span><span>object</span></p></td></tr><tr key=0-2-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> person_id</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员id</span></td><td key=5></td></tr><tr key=0-2-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> pass_mode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">通行模式</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>face,card,face_and_card,face_and_password,gate,qrcode,force,card_and_password</span></p></td></tr><tr key=0-2-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> verification_mode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">认证模式</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>face,face_or_card,face_and_card,face_and_pass,card_and_pass</span></p></td></tr><tr key=0-2-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> recognition_score</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">相似度</span></td><td key=5></td></tr><tr key=0-2-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> liveness</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否活体</span></td><td key=5></td></tr><tr key=0-2-5><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> liveness_score</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">活体分数</span></td><td key=5></td></tr><tr key=0-2-6><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> person_name</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员姓名</span></td><td key=5></td></tr><tr key=0-2-7><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> card_number</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">卡号</span></td><td key=5></td></tr><tr key=0-2-8><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> timestamp</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">时间戳，ISO8601格式</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+<h1 id="u5b9eu65f6u6570u636eu63a8u9001u63a5u53e3">实时数据推送接口</h1>
+<p></p>
+<h2 id="u6d88u606fu8ba2u96050a3ca20id3du6d88u606fu8ba2u96053e203ca3e">消息订阅
+<a id=消息订阅> </a></h2>
+<p></p>
+<h3 id="-115">基本信息</h3>
+<p><strong>Path：</strong> /api/subscribe</p>
+<p><strong>Method：</strong> GET</p>
+<p><strong>接口描述：</strong></p>
+<p><strong>本接口需要使用Websocket协议连接，YAPI接口测试暂时不支持</strong>；<br>
+成功连接后，每隔5秒服务器会发PING心跳，客户端直接回复PONG即可保持长连接。</p>
+<h3 id="-116">请求参数</h3>
+<p><strong>Query</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>session_id</td>
+<td>是</td>
+<td>session_id=xxxxxx</td>
+<td>xxxxxx为登录认证后返回的sessioID；</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-117">返回数据</h3>
+<table>
+  <thead class="ant-table-thead">
+    <tr>
+      <th key=name>名称</th><th key=type>类型</th><th key=required>是否必须</th><th key=default>默认值</th><th key=desc>备注</th><th key=sub>其他信息</th>
+    </tr>
+  </thead><tbody className="ant-table-tbody"><tr key=0-0><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> pass_info</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">通行报警消息</span></td><td key=5></td></tr><tr key=0-0-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> recognition_type</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">消息类型，staff – 普通人员，visitor – 访问者，blacklist – 黑名单人员，stranger – 陌生人</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>staff,visitor,blacklist,stranger</span></p><p key=3><span style="font-weight: '700'">枚举备注: </span><span></span></p></td></tr><tr key=0-0-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> passed</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否成功通行</span></td><td key=5></td></tr><tr key=0-0-2><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> pass_mode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">通行模式，face – 人脸，card – 卡号，face_and_card – 人脸和卡号，face_and_password – 人脸和密码，card_and_password – 卡号和密码，gate – 开门，qrcode – 二维码，force – 胁迫通行</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>face,card,face_and_card,face_and_password,card_and_password,gate,qrcode,force</span></p><p key=3><span style="font-weight: '700'">枚举备注: </span><span></span></p></td></tr><tr key=0-0-3><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> verification_mode</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">认证模式，face – 人脸，face_or_card – 人脸或卡号，face_and_card – 人脸和卡号，face_and_pass – 人脸和密码</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>face,face_or_card,face_and_card,face_and_pass</span></p><p key=3><span style="font-weight: '700'">枚举备注: </span><span></span></p></td></tr><tr key=0-0-4><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> recognition_score</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">比对分数</span></td><td key=5></td></tr><tr key=0-0-5><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> liveness</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否为活体</span></td><td key=5></td></tr><tr key=0-0-6><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> liveness_score</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">活体分数</span></td><td key=5></td></tr><tr key=0-0-7><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> mask</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">是否戴口罩</span></td><td key=5></td></tr><tr key=0-0-8><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> therm</span></td><td key=1><span>boolean</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">测温结果是否通过</span></td><td key=5></td></tr><tr key=0-0-9><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> temperature</span></td><td key=1><span>number</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员体温</span></td><td key=5></td></tr><tr key=0-0-10><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> person_id</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员id</span></td><td key=5></td></tr><tr key=0-0-11><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> person_name</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">人员姓名</span></td><td key=5></td></tr><tr key=0-0-12><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> card_number</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">卡号</span></td><td key=5></td></tr><tr key=0-0-13><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> timestamp</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">时间戳</span></td><td key=5></td></tr><tr key=0-0-14><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> picture_data</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">图片数据，bas64编码</span></td><td key=5></td></tr><tr key=0-1><td key=0><span style="padding-left: 0px"><span style="color: #8c8a8a"></span> alarm_info</span></td><td key=1><span>object</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">普通报警消息</span></td><td key=5></td></tr><tr key=0-1-0><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> type</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">报警类型，tamper – 防拆报警，doorTimeout – 开门超时，alarm1Fire – 报警输入1消防报警 ，alarm1Alert – 报警输入1普通报警，alarm2Fire – 报警输入2消防报警，alarm2Alert – 报警输入2 普通报警，doorbell – 门铃，addFace – 新增人脸，authCrack – 认证超限，storageFull – 存储空间满，forcePass – 胁迫通行，forceOpen – 门磁强开报警，doorOpenSuccess – 开门成功，doorOpenFail – 开门失败</span></td><td key=5><p key=2><span style="font-weight: '700'">枚举: </span><span>tamper,doorTimeout,alarm1Fire,alarm1Alert,alarm2Fire,alarm2Alert,doorbell,addFace,authCrack,storageFull,forcePass,forceOpen,doorOpenSuccess,doorOpenFail</span></p><p key=3><span style="font-weight: '700'">枚举备注: </span><span></span></p></td></tr><tr key=0-1-1><td key=0><span style="padding-left: 20px"><span style="color: #8c8a8a">├─</span> timestamp</span></td><td key=1><span>string</span></td><td key=2>非必须</td><td key=3></td><td key=4><span style="white-space: pre-wrap">时间戳</span></td><td key=5></td></tr>
+               </tbody>
+              </table>
+
+            <footer class="m-footer">
+              <p>Build by <a href="https://ymfe.org/">YMFE</a>.</p>
+            </footer>
+          </div>
+        </div>
+      </body>
+      </html>
+      
