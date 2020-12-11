@@ -136,6 +136,18 @@ CREATE SEQUENCE "public"."program_id_seq"
 SELECT setval('"public"."program_id_seq"', 1, true);
 
 -- ----------------------------
+-- Sequence structure for data_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."data_id_seq";
+CREATE SEQUENCE "public"."data_id_seq"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 1
+ CACHE 1;
+SELECT setval('"public"."data_id_seq"', 1, true);
+
+-- ----------------------------
 -- Table structure for device
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."device";
@@ -423,6 +435,28 @@ WITH (OIDS=FALSE)
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for datastats
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."datastats";
+CREATE TABLE "public"."datastats" (
+"id" int4 DEFAULT nextval('data_id_seq'::regclass) NOT NULL,
+"linktable" varchar(32) COLLATE "default",
+"linkid" int4,
+"linkinfo" varchar(128) COLLATE "default",
+"infoa" int4,
+"infob" varchar(1024) COLLATE "default",
+"stats" varchar(1024) COLLATE "default",
+"modifytime" timestamp(6),
+"createtime" timestamp(0),
+"remark" varchar(512) COLLATE "default",
+"companyid" int4
+)
+WITH (OIDS=FALSE)
+
+;
+
+
+-- ----------------------------
 -- Alter Sequences Owned By 
 -- ----------------------------
 
@@ -475,3 +509,8 @@ ALTER TABLE "public"."fileinfo" ADD PRIMARY KEY ("id");
 -- Primary Key structure for table programs
 -- ----------------------------
 ALTER TABLE "public"."programs" ADD PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table datastats
+-- ----------------------------
+ALTER TABLE "public"."datastats" ADD PRIMARY KEY ("id");
