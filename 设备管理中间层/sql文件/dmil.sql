@@ -148,6 +148,30 @@ CREATE SEQUENCE "public"."data_id_seq"
 SELECT setval('"public"."data_id_seq"', 1, true);
 
 -- ----------------------------
+-- Sequence structure for config_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."config_id_seq";
+CREATE SEQUENCE "public"."config_id_seq"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 1
+ CACHE 1;
+SELECT setval('"public"."config_id_seq"', 1, true);
+
+-- ----------------------------
+-- Sequence structure for param_id_seq
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."param_id_seq";
+CREATE SEQUENCE "public"."param_id_seq"
+ INCREMENT 1
+ MINVALUE 1
+ MAXVALUE 9223372036854775807
+ START 1
+ CACHE 1;
+SELECT setval('"public"."param_id_seq"', 1, true);
+
+-- ----------------------------
 -- Table structure for device
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."device";
@@ -455,6 +479,43 @@ WITH (OIDS=FALSE)
 
 ;
 
+-- ----------------------------
+-- Table structure for config
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."config";
+CREATE TABLE "public"."config" (
+"id" int4 DEFAULT nextval('config_id_seq'::regclass) NOT NULL,
+"name" varchar(256) COLLATE "default",
+"type" int4,
+"configid" int4,
+"configinfo" varchar(255) COLLATE "default",
+"createtime" timestamp(6),
+"modifytime" timestamp(0),
+"status" int4,
+"remark" varchar(256) COLLATE "default"
+)
+WITH (OIDS=FALSE)
+
+;
+
+-- ----------------------------
+-- Table structure for paraminfo
+-- ----------------------------
+DROP TABLE IF EXISTS "public"."paraminfo";
+CREATE TABLE "public"."paraminfo" (
+"id" int4 DEFAULT nextval('param_id_seq'::regclass) NOT NULL,
+"linkid" int4 NOT NULL,
+"termsn" varchar(256) COLLATE "default",
+"paramid" int4,
+"paraminfo" varchar(1024) COLLATE "default",
+"createtime" timestamp(6),
+"modifytime" timestamp(6),
+"status" int4,
+"remark" varchar(256) COLLATE "default"
+)
+WITH (OIDS=FALSE)
+
+;
 
 -- ----------------------------
 -- Alter Sequences Owned By 
@@ -514,3 +575,13 @@ ALTER TABLE "public"."programs" ADD PRIMARY KEY ("id");
 -- Primary Key structure for table datastats
 -- ----------------------------
 ALTER TABLE "public"."datastats" ADD PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table config
+-- ----------------------------
+ALTER TABLE "public"."config" ADD PRIMARY KEY ("id");
+
+-- ----------------------------
+-- Primary Key structure for table paraminfo
+-- ----------------------------
+ALTER TABLE "public"."paraminfo" ADD PRIMARY KEY ("id");
