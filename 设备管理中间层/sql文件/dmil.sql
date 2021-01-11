@@ -271,7 +271,8 @@ CREATE TABLE "public"."software" (
 "qrcode" varchar(32) COLLATE "default",
 "qrpath" varchar(512) COLLATE "default",
 "fitmodel" varchar(10240) COLLATE "default",
-"remark" varchar(1024) COLLATE "default"
+"remark" varchar(1024) COLLATE "default",
+"pubflag" int4
 )
 WITH (OIDS=FALSE)
 
